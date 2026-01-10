@@ -50,12 +50,12 @@
             </a>
 
             <h1 class="fw-bold fs-2qx text-gray-800 mb-7">
-                Не тот доступ!
+                Доступ запрещен
             </h1>
 
             <div class="fs-3 fw-semibold text-muted mb-10">
-                Чтобы всё наладить, пиши в IT: <br/>
-                <a href="mailto:it@metak.az" class="link-primary fw-bold">it@metak.az</a>, они разберутся!
+                У вас недостаточно прав для доступа к этой странице.
+                <br/>Обратитесь к администратору для получения необходимых прав доступа.
             </div>
 
             <div class="text-center mb-10">

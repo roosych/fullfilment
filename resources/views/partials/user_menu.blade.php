@@ -130,7 +130,7 @@
                           @else
                               Azərbaycanca
                           @endif
-                          <img class="w-15px h-15px rounded-1 ms-2" src="{{asset('assets/img/' . app()->getLocale() . '.svg')}}" />
+                          <img class="w-15px h-15px rounded-1 ms-2" src="{{asset('assets/img/' . (app()->getLocale() === 'ru' ? 'ru' : 'az') . '.svg')}}" />
                       </span>
                   </span>
             </a>
