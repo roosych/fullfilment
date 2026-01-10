@@ -129,12 +129,13 @@
                         <td>
                             <div class="d-flex justify-content-end">
                                 <div class="form-check form-check-solid form-check-custom form-switch">
-                                    <input class="form-check-input w-35px h-20px"
+                                    <input class="form-check-input w-35px h-20px merchant-status-toggle"
                                            type="checkbox"
-                                           id="activeSwitch"
+                                           id="activeSwitch{{$merchant->user->id}}"
                                            data-user-id="{{$merchant->user->id}}"
+                                           data-url="{{ route('dashboard.merchants.toggle-status', $merchant) }}"
                                         {{$merchant->user->active ? 'checked' : ''}}>
-                                    <label class="form-check-label" for="activeSwitch"></label>
+                                    <label class="form-check-label" for="activeSwitch{{$merchant->user->id}}"></label>
                                 </div>
                             </div>
                         </td>
@@ -176,4 +177,73 @@
 
 @push('custom_js')
     <script src="{{asset('assets/js/custom/merchants/table.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            // Обработка переключения статуса мерчанта
+            $(document).on('change', '.merchant-status-toggle', function() {
+                const $checkbox = $(this);
+                const userId = $checkbox.data('user-id');
+                const url = $checkbox.data('url');
+                const isChecked = $checkbox.is(':checked');
+
+                // Сохраняем текущее состояние для возможного отката
+                const previousState = !isChecked;
+
+                // Блокируем чекбокс во время запроса
+                $checkbox.prop('disabled', true);
+
+                $.ajax({
+                    url: url,
+                    method: 'PATCH',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            // Обновляем состояние чекбокса
+                            $checkbox.prop('checked', response.active);
+                            
+                            // Показываем уведомление об успехе, если Swal доступен
+                            if (typeof Swal !== 'undefined') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: response.message,
+                                    timer: 2000,
+                                    showConfirmButton: false,
+                                    toast: true,
+                                    position: 'top-end'
+                                });
+                            }
+                        }
+                    },
+                    error: function(xhr) {
+                        // Откатываем состояние чекбокса при ошибке
+                        $checkbox.prop('checked', previousState);
+                        
+                        const message = xhr.responseJSON?.message || 'An error occurred while updating the status';
+                        
+                        // Показываем уведомление об ошибке, если Swal доступен
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: message,
+                                timer: 3000,
+                                showConfirmButton: false,
+                                toast: true,
+                                position: 'top-end'
+                            });
+                        } else {
+                            alert(message);
+                        }
+                    },
+                    complete: function() {
+                        // Разблокируем чекбокс после завершения запроса
+                        $checkbox.prop('disabled', false);
+                    }
+                });
+            });
+        });
+    </script>
 @endpush

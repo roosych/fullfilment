@@ -26,6 +26,7 @@ Route::prefix('dashboard')
         Route::get('merchants/{merchant}/edit', [MerchantController::class, 'edit'])->name('merchants.edit');
         Route::put('merchants/{merchant}', [MerchantController::class, 'update'])->name('merchants.update');
         Route::get('merchants/{merchant}/stock', [MerchantController::class, 'stock'])->name('merchants.stock');
+        Route::patch('merchants/{merchant}/toggle-status', [MerchantController::class, 'toggleStatus'])->name('merchants.toggle-status');
 
         Route::get('merchants/{merchant}/products', [OrderController::class, 'getMerchantProducts'])->name('merchant.products');
 

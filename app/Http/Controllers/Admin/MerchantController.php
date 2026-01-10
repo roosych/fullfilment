@@ -19,9 +19,6 @@ class MerchantController extends Controller
     public function index()
     {
         $merchants = Merchant::with('user')
-            ->whereHas('user', function ($query) {
-                $query->where('active', true); // только активные пользователи
-            })
             ->latest()
             ->get();
 
@@ -232,6 +229,28 @@ class MerchantController extends Controller
                 'type' => 'success',
                 'message' => 'Merchant updated successfully!',
             ]);
+    }
+
+    public function toggleStatus(Request $request, Merchant $merchant)
+    {
+        // Проверяем, что пользователь является мерчантом
+        if (!$merchant->user || !$merchant->user->hasRole(UserRoleEnum::MERCHANT->value)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User is not a merchant',
+            ], 422);
+        }
+
+        $user = $merchant->user;
+        $user->update([
+            'active' => !$user->active,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'active' => $user->active,
+            'message' => $user->active ? 'Merchant activated successfully' : 'Merchant deactivated successfully',
+        ]);
     }
 
 }

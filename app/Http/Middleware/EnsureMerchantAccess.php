@@ -33,6 +33,19 @@ class EnsureMerchantAccess
             abort(403, 'Merchant profile not found. Please contact administrator.');
         }
 
+        // Проверяем, что мерчант активен
+        if (!$user->active) {
+            auth()->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect()->route('login')
+                ->with('alert', [
+                    'type' => 'error',
+                    'message' => 'Your account is inactive. Please contact an administrator.',
+                ]);
+        }
+
         return $next($request);
     }
 }

@@ -68,9 +68,9 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        // Проверяем, что активные админы могут авторизоваться
+        // Проверяем, что активные админы и мерчанты могут авторизоваться
         $user = Auth::user();
-        if ($user->hasRole(UserRoleEnum::ADMIN->value) && !$user->active) {
+        if (($user->hasRole(UserRoleEnum::ADMIN->value) || $user->hasRole(UserRoleEnum::MERCHANT->value)) && !$user->active) {
             Auth::logout();
             RateLimiter::hit($this->throttleKey());
 
