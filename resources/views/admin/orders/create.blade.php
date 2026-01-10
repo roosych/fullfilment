@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Create order')
+@section('title', 'Создать заказ')
 
 @section('content')
 
@@ -10,18 +10,18 @@
             <div class="card card-flush py-4">
                 <div class="card-header">
                     <div class="card-title">
-                        <h2>Order Details</h2>
+                        <h2>Детали заказа</h2>
                     </div>
                 </div>
                 <div class="card-body pt-0">
                     <div class="d-flex flex-column gap-5">
                         <!-- Merchant -->
                         <div class="fv-row fv-plugins-icon-container">
-                            <label class="required form-label">Merchant</label>
+                            <label class="required form-label">Мерчант</label>
                             <select id="merchant_id" class="form-select mb-2"
                                     name="merchant_id"
                                     data-control="select2"
-                                    data-placeholder="Choose a merchant..."
+                                    data-placeholder="Выберите мерчанта..."
                                     required>
                                 <option value=""></option>
                                 @foreach($merchants as $merchant)
@@ -31,16 +31,16 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <div class="text-muted fs-7">This merchant will own the order.</div>
+                            <div class="text-muted fs-7">Этот мерчант будет владельцем заказа.</div>
                         </div>
 
                         <!-- Tariff -->
                         <div class="fv-row fv-plugins-icon-container">
-                            <label class="required form-label">Tariff</label>
+                            <label class="required form-label">Тариф</label>
                             <select id="rate_id" class="form-select mb-2"
                                     name="tariff_id"
                                     data-control="select2"
-                                    data-placeholder="Choose a tariff..."
+                                    data-placeholder="Выберите тариф..."
                                     required>
                                 <option value=""></option>
                                 @foreach($tariffs as $tariff)
@@ -49,22 +49,22 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <div class="text-muted fs-7">Set the date of the order to process.</div>
+                            <div class="text-muted fs-7">Установите дату заказа для обработки.</div>
                         </div>
 
                         <div class="fv-row fv-plugins-icon-container">
-                            <label class="required form-label">Zone</label>
+                            <label class="required form-label">Зона</label>
                             <select id="zone_id" class="form-select mb-2"
                                     name="zone_id"
                                     data-control="select2"
-                                    data-placeholder="Choose a zone..."
+                                    data-placeholder="Выберите зону..."
                                     required>
                                 <option value=""></option>
                                 @if(old('zone_id'))
-                                    <option value="{{ old('zone_id') }}" selected>{{ old('zone_name', 'Selected Zone') }}</option>
+                                    <option value="{{ old('zone_id') }}" selected>{{ old('zone_name', 'Выбранная зона') }}</option>
                                 @endif
                             </select>
-                            <div class="text-muted fs-7">Choose delivery zone for this tariff.</div>
+                            <div class="text-muted fs-7">Выберите зону доставки для этого тарифа.</div>
                         </div>
                     </div>
                 </div>
@@ -75,24 +75,24 @@
         <div class="d-flex flex-column flex-lg-row-fluid gap-7 gap-lg-10">
             <div class="card card-flush py-4 flex-row-fluid overflow-hidden">
                 <div class="card-header">
-                    <div class="card-title"><h2>Order Items</h2></div>
+                    <div class="card-title"><h2>Товары заказа</h2></div>
                 </div>
                 <div class="card-body pt-0">
                     <div class="table-responsive">
                         <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
                             <thead>
                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                                <th>Product</th>
-                                <th class="text-end">SKU</th>
-                                <th class="text-end">Stock</th>
-                                <th class="text-end">Qty</th>
+                                <th>Товар</th>
+                                <th class="text-end">Артикул</th>
+                                <th class="text-end">Склад</th>
+                                <th class="text-end">Кол-во</th>
                             </tr>
                             </thead>
                             <tbody class="fw-semibold text-gray-600">
                             <tr class="loader-row d-none">
                                 <td colspan="4" class="text-center py-5">
                                     <div class="spinner-border text-primary" role="status">
-                                        <span class="visually-hidden">Loading...</span>
+                                        <span class="visually-hidden">Загрузка...</span>
                                     </div>
                                 </td>
                             </tr>
@@ -105,7 +105,7 @@
             <div class="card card-flush py-4">
                 <div class="card-header">
                     <div class="card-title">
-                        <h2>Delivery Details</h2>
+                        <h2>Детали доставки</h2>
                     </div>
                 </div>
 
@@ -113,31 +113,31 @@
                     <div class="d-flex flex-column gap-5 gap-md-7">
                         <div class="d-flex flex-column flex-md-row gap-5">
                             <div class="flex-row-fluid">
-                                <label class="form-label required">Address</label>
+                                <label class="form-label required">Адрес</label>
                                 <input class="form-control @error('recipient_address') is-invalid @enderror"
                                        name="recipient_address"
-                                       placeholder="Delivery address"
+                                       placeholder="Адрес доставки"
                                        value="{{ old('recipient_address') }}">
                                 @error('recipient_address')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="fv-row flex-row-fluid fv-plugins-icon-container">
-                                <label class="required form-label">Name</label>
+                                <label class="required form-label">Имя</label>
                                 <input class="form-control @error('recipient_name') is-invalid @enderror"
                                        name="recipient_name"
-                                       placeholder="Recipient name"
+                                       placeholder="Имя получателя"
                                        value="{{ old('recipient_name') }}">
                                 @error('recipient_name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="fv-row flex-row-fluid fv-plugins-icon-container">
-                                <label class="required form-label">Phone</label>
+                                <label class="required form-label">Телефон</label>
                                 <input class="form-control @error('recipient_phone') is-invalid @enderror"
                                        id="recipient_phone"
                                        name="recipient_phone"
-                                       placeholder="Recipient phone"
+                                       placeholder="Телефон получателя"
                                        value="{{ old('recipient_phone') }}">
                                 @error('recipient_phone')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -146,11 +146,11 @@
                         </div>
 
                         <div class="fv-row fv-plugins-icon-container">
-                            <label class="form-label">Note</label>
+                            <label class="form-label">Примечание</label>
                             <textarea class="form-control @error('notes') is-invalid @enderror"
                                       name="notes"
                                       rows="2"
-                                      placeholder="Optional note about the order">{{ old('notes') }}</textarea>
+                                      placeholder="Необязательное примечание к заказу">{{ old('notes') }}</textarea>
                             @error('notes')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -160,8 +160,8 @@
             </div>
 
             <div class="d-flex justify-content-end mt-2">
-                <a href="{{route('dashboard.order.index')}}" class="btn btn-light me-5">Cancel</a>
-                <button type="submit" class="btn btn-primary"><span class="indicator-label">Create Order</span></button>
+                <a href="{{route('dashboard.order.index')}}" class="btn btn-light me-5">Отмена</a>
+                <button type="submit" class="btn btn-primary"><span class="indicator-label">Создать заказ</span></button>
             </div>
         </div>
 
@@ -174,7 +174,7 @@
         <script>
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'Упс...',
                 html: `{!! implode('<br>', $errors->all()) !!}`
             });
         </script>
@@ -210,7 +210,7 @@
                     url: url,
                     method: 'GET',
                     beforeSend: function () {
-                        $('#zone_id').html('<option value="">Loading...</option>').prop('disabled', true).trigger('change');
+                        $('#zone_id').html('<option value="">Загрузка...</option>').prop('disabled', true).trigger('change');
                     },
                     success: function (response) {
                         let zoneSelect = $('#zone_id');

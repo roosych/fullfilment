@@ -18,18 +18,18 @@
             <div class="modal-body pb-0">
 
                 <div class="mb-10 text-center">
-                    <h1 class="mb-3">Let’s Add Some Stock</h1>
+                    <h1 class="mb-3">Добавить товар на склад</h1>
                     <div class="text-muted fw-semibold fs-5">
-                        Pick a merchant and select the warehouse where new items will arrive.
+                        Выберите мерчанта и склад, куда поступят новые товары.
                     </div>
                 </div>
                 <div class="mb-8">
                     <label for="merchant" class="form-label">
-                        Merchant
+                        Мерчант
                     </label>
                     <select id="merchant" class="form-select"
                             data-control="select2"
-                            data-placeholder="Choose a merchant..."
+                            data-placeholder="Выберите мерчанта..."
                     >
                         <option value=""></option>
                         @foreach($merchants as $merchant)
@@ -42,7 +42,7 @@
 
                 <div class="mb-3">
                     <label class="fs-6 fw-semibold mb-3">
-                        Destination warehouse
+                        Склад назначения
                     </label>
                     <div data-kt-buttons="true">
                         @foreach($warehouses as $warehouse)
@@ -61,7 +61,7 @@
                                     <h2 class="d-flex align-items-center fs-3 fw-bold flex-wrap">
                                         {{$warehouse->name}}
                                         @if($warehouse->is_primary)
-                                            <span class="badge badge-light-success ms-2 fs-7">Default</span>
+                                            <span class="badge badge-light-success ms-2 fs-7">По умолчанию</span>
                                         @endif
                                     </h2>
                                     <div class="fw-semibold opacity-50">
@@ -76,8 +76,8 @@
             </div>
 
             <div class="modal-footer border-0">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" id="proceedButton" class="btn btn-primary">Proceed</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" id="proceedButton" class="btn btn-primary">Продолжить</button>
             </div>
         </div>
     </div>
@@ -92,9 +92,9 @@
         if (!merchantUuid || !warehouseUuid) {
             Swal.fire({
                 icon: 'warning',
-                title: 'Selection required',
-                html: 'Please select <b>merchant</b> and <b>warehouse</b> to continue.',
-                confirmButtonText: 'OK',
+                title: 'Требуется выбор',
+                html: 'Пожалуйста, выберите <b>мерчанта</b> и <b>склад</b> для продолжения.',
+                confirmButtonText: 'ОК',
                 customClass: {
                     popup: 'swal2-border-radius'
                 }

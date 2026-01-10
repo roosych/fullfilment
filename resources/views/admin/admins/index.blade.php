@@ -1,19 +1,19 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Administrators')
+@section('title', 'Администраторы')
 
 @section('breadcrumbs')
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
         <li class="breadcrumb-item text-muted">
             <a href="{{route('dashboard.index')}}" class="text-muted text-hover-primary">
-                Dashboard
+                Панель управления
             </a>
         </li>
         <li class="breadcrumb-item">
             <span class="bullet bg-gray-500 w-5px h-2px"></span>
         </li>
         <li class="breadcrumb-item text-muted">
-            Administrators
+            Администраторы
         </li>
     </ul>
 @endsection
@@ -26,7 +26,7 @@
                 <span class="path2"></span>
                 <span class="path3"></span>
             </i>
-            Add Administrator
+            Добавить администратора
         </a>
     </div>
 @endsection
@@ -90,7 +90,7 @@
                 @empty
                     <tr>
                         <td colspan="5" class="text-center py-10">
-                            <span class="text-gray-500">No administrators found</span>
+                            <span class="text-gray-500">Администраторы не найдены</span>
                         </td>
                     </tr>
                 @endforelse
@@ -144,7 +144,7 @@
                             if (typeof Swal !== 'undefined') {
                                 Swal.fire({
                                     icon: 'success',
-                                    title: 'Success',
+                                    title: 'Успешно',
                                     text: response.message,
                                     timer: 2000,
                                     showConfirmButton: false,
@@ -158,13 +158,13 @@
                         // Откатываем состояние чекбокса при ошибке
                         $checkbox.prop('checked', previousState);
                         
-                        const message = xhr.responseJSON?.message || 'An error occurred while updating the status';
+                        const message = xhr.responseJSON?.message || 'Произошла ошибка при обновлении статуса';
                         
                         // Показываем уведомление об ошибке, если Swal доступен
                         if (typeof Swal !== 'undefined') {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Error',
+                                title: 'Ошибка',
                                 text: message,
                                 timer: 3000,
                                 showConfirmButton: false,

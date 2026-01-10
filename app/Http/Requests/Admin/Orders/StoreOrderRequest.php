@@ -48,13 +48,13 @@ class StoreOrderRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'products.required' => 'Please select at least one product.',
-            'products.min' => 'Please select at least one product.',
-            'products.*.quantity.required' => 'Please specify quantity for each selected product.',
-            'products.*.quantity.min' => 'Quantity must be at least 1.',
-            'recipient_address.required' => 'Please enter the delivery address.',
-            'recipient_name.required' => 'Please enter the recipient name.',
-            'recipient_phone.required' => 'Please enter the recipient phone.',
+            'products.required' => 'Пожалуйста, выберите хотя бы один товар.',
+            'products.min' => 'Пожалуйста, выберите хотя бы один товар.',
+            'products.*.quantity.required' => 'Пожалуйста, укажите количество для каждого выбранного товара.',
+            'products.*.quantity.min' => 'Количество должно быть не менее 1.',
+            'recipient_address.required' => 'Пожалуйста, введите адрес доставки.',
+            'recipient_name.required' => 'Пожалуйста, введите имя получателя.',
+            'recipient_phone.required' => 'Пожалуйста, введите телефон получателя.',
         ];
     }
 

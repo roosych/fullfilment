@@ -11,7 +11,7 @@
                        data-bs-toggle="tab"
                        href="#kt_ecommerce_sales_order_summary"
                        aria-selected="true" role="tab">
-                        Order Summary
+                        Сводка заказа
                     </a>
                 </li>
 
@@ -20,7 +20,7 @@
                        data-bs-toggle="tab"
                        href="#kt_ecommerce_sales_order_history"
                        aria-selected="false" role="tab">
-                        Order History
+                        История заказа
                     </a>
                 </li>
             </ul>
@@ -53,20 +53,20 @@
                             </div>
 
                             <div class="card-header">
-                                <div class="card-title"><h2>Info</h2></div>
+                                <div class="card-title"><h2>Информация</h2></div>
                             </div>
 
                             <div class="card-body pt-0">
                                 <div>
-                                    Merchant: <span class="fs-5 fw-bold text-gray-800">
-                                    {{$order->merchant->user->name ?? 'unknown'}} <span class="ms-3">{{$order->merchant->user->phone ?? 'unknown'}}</span>
+                                    Мерчант: <span class="fs-5 fw-bold text-gray-800">
+                                    {{$order->merchant->user->name ?? 'не указан'}} <span class="ms-3">{{$order->merchant->user->phone ?? 'не указан'}}</span>
                                 </span>
                                 </div>
                                 <div>
-                                    Tariff: <span class="fs-5 fw-bold text-gray-800">{{$order->rate->name ?? 'unknown'}}</span>
+                                    Тариф: <span class="fs-5 fw-bold text-gray-800">{{$order->rate->name ?? 'не указан'}}</span>
                                 </div>
                                 <div>
-                                    Zone: <span class="fs-5 fw-bold text-gray-800">{{$order->zone->name ?? 'unknown'}}</span>
+                                    Зона: <span class="fs-5 fw-bold text-gray-800">{{$order->zone->name ?? 'не указана'}}</span>
                                 </div>
                             </div>
                         </div>
@@ -84,34 +84,34 @@
                             </div>
 
                             <div class="card-header">
-                                <div class="card-title"><h2>Delivery Info</h2></div>
+                                <div class="card-title"><h2>Информация о доставке</h2></div>
                             </div>
 
                             <div class="card-body pt-0">
                                 <div>
-                                    Recipient: <span class="fs-5 fw-bold text-gray-800">
-                                    {{$order->recipient_name ?? 'unknown'}} <span class="ms-3">{{$order->recipient_phone ?? 'unknown'}}</span>
+                                    Получатель: <span class="fs-5 fw-bold text-gray-800">
+                                    {{$order->recipient_name ?? 'не указан'}} <span class="ms-3">{{$order->recipient_phone ?? 'не указан'}}</span>
                                 </span>
                                 </div>
                                 <div>
-                                    Address: <span class="fs-5 fw-bold text-gray-800">{{$order->recipient_address}}</span>
+                                    Адрес: <span class="fs-5 fw-bold text-gray-800">{{$order->recipient_address}}</span>
                                 </div>
                                 <div>
-                                    Notes: <span class="fs-5 fw-bold text-gray-800">{{$order->notes}}</span>
+                                    Примечания: <span class="fs-5 fw-bold text-gray-800">{{$order->notes}}</span>
                                 </div>
 
                                 @if($order->activeDelivery)
                                     <div>
-                                        Price:
+                                        Цена:
                                         <span class="fs-5 fw-bold text-gray-800">
                                         {{ money($order->activeDelivery->price) }}
                                     </span>
                                     </div>
 
                                     <div>
-                                        Weight:
+                                        Вес:
                                         <span class="fs-5 fw-bold text-gray-800 ms-2">
-                                        {{ (int)$order->activeDelivery->weight }} gr.
+                                        {{ (int)$order->activeDelivery->weight }} гр.
                                     </span>
                                     </div>
 
@@ -120,18 +120,18 @@
                                             <button class="btn btn-sm btn-primary start-delivery-btn"
                                                     data-delivery-id="{{ $order->activeDelivery->id }}"
                                                     data-url="{{ route('dashboard.deliveries.start', $order->activeDelivery) }}">
-                                                Start Delivery
+                                                Отправить в путь
                                             </button>
                                             <button class="btn btn-sm btn-success ms-2 complete-delivery-btn"
                                                     data-delivery-id="{{ $order->activeDelivery->id }}"
                                                     data-url="{{ route('dashboard.deliveries.complete', $order->activeDelivery) }}"
-                                                    title="Complete without charging">
-                                                Complete
+                                                    title="Завершить без списания">
+                                                Завершить
                                             </button>
                                             <button class="btn btn-sm btn-danger ms-2 cancel-delivery-btn"
                                                     data-delivery-id="{{ $order->activeDelivery->id }}"
                                                     data-url="{{ route('dashboard.deliveries.cancel', $order->activeDelivery) }}">
-                                                Cancel
+                                                Отменить
                                             </button>
                                         </div>
                                     @elseif($order->activeDelivery->status->is(\App\Enums\DeliveryStatusEnum::ON_THE_WAY))
@@ -139,13 +139,13 @@
                                             <button class="btn btn-sm btn-success complete-delivery-btn"
                                                     data-delivery-id="{{ $order->activeDelivery->id }}"
                                                     data-url="{{ route('dashboard.deliveries.complete', $order->activeDelivery) }}"
-                                                    title="Complete and charge merchant">
-                                                Mark as Delivered (Charge)
+                                                    title="Завершить и списать с мерчанта">
+                                                Отметить как доставлено (Списать)
                                             </button>
                                             <button class="btn btn-sm btn-danger ms-2 fail-delivery-btn"
                                                     data-delivery-id="{{ $order->activeDelivery->id }}"
                                                     data-url="{{ route('dashboard.deliveries.fail', $order->activeDelivery) }}">
-                                                Mark as Failed
+                                                Отметить как неудачную
                                             </button>
                                         </div>
                                     @endif
@@ -168,9 +168,9 @@
                                 <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
                                     <thead>
                                     <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                                        <th class="min-w-175px">Product</th>
-                                        <th class="min-w-100px text-end">SKU</th>
-                                        <th class="w-150px text-end">Qty</th>
+                                        <th class="min-w-175px">Товар</th>
+                                        <th class="min-w-100px text-end">Артикул</th>
+                                        <th class="w-150px text-end">Кол-во</th>
                                     </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
@@ -192,20 +192,20 @@
 
                                     @if($order->status->is(\App\Enums\OrderStatusEnum::CREATED))
                                         <tr>
-                                            <td colspan="2" class="fs-5 text-gray-800 text-end">Total Weight (gr)</td>
+                                            <td colspan="2" class="fs-5 text-gray-800 text-end">Общий вес (гр.)</td>
                                             <td class="text-gray-800 fs-5 fw-bolder text-end">
                                                 <input name="weight_input" id="weight_input" type="number" class="form-control">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2" class="fs-3 text-gray-800 text-end">Delivery cost</td>
+                                            <td colspan="2" class="fs-3 text-gray-800 text-end">Стоимость доставки</td>
                                             <td class="text-gray-800 fs-3 fw-bolder text-end">
                                                 <span id="delivery_price">0.00</span>₼
                                             </td>
                                         </tr>
                                     @elseif($order->activeDelivery)
                                         <tr>
-                                            <td colspan="2" class="fs-3 text-gray-800 text-end">Delivery cost</td>
+                                            <td colspan="2" class="fs-3 text-gray-800 text-end">Стоимость доставки</td>
                                             <td class="text-gray-800 fs-3 fw-bolder text-end">
                                                 <span id="delivery_price">{{ money($order->activeDelivery->price) }}</span>
                                             </td>
@@ -219,7 +219,7 @@
                                         <form id="delivery_form" action="{{ route('dashboard.deliveries.store', $order->uuid) }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="weight_input" id="weight_input_hidden">
-                                            <button type="submit" class="btn btn-primary" id="create_delivery_btn">Create Delivery</button>
+                                            <button type="submit" class="btn btn-primary" id="create_delivery_btn">Создать доставку</button>
                                         </form>
                                     </div>
                                 @endif
@@ -234,7 +234,7 @@
                 <div class="d-flex flex-column gap-7 gap-lg-10">
                     <div class="card card-flush py-4 flex-row-fluid">
                         <div class="card-header">
-                            <div class="card-title"><h2>Order History</h2></div>
+                            <div class="card-title"><h2>История заказа</h2></div>
                         </div>
                         <div class="card-body pt-0">
                             <div class="table-responsive"></div>
@@ -242,7 +242,7 @@
                     </div>
                     <div class="card card-flush py-4 flex-row-fluid">
                         <div class="card-header">
-                            <div class="card-title"><h2>Order Data</h2></div>
+                            <div class="card-title"><h2>Данные заказа</h2></div>
                         </div>
                         <div class="card-body pt-0">
                             <div class="table-responsive"></div>
@@ -259,7 +259,7 @@
         <script>
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'Упс...',
                 html: `{!! implode('<br>', $errors->all()) !!}`
             });
         </script>
@@ -348,11 +348,11 @@
                 const $btn = $(this);
                 const url = $btn.data('url');
                 Swal.fire({
-                    title: 'Start Delivery?',
+                    title: 'Отправить доставку в путь?',
                     html: '<p class="mb-2">Доставка будет переведена в статус "В пути"</p>',
                     icon: 'info',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, Start',
+                    confirmButtonText: 'Да, отправить',
                     showLoaderOnConfirm: true,
                     preConfirm: () => $.post(url, {_token: "{{ csrf_token() }}"})
                 }).then((result) => { if(result.isConfirmed){ location.reload(); } });
@@ -363,10 +363,10 @@
                 const $btn = $(this);
                 const url = $btn.data('url');
                 Swal.fire({
-                    title: 'Complete Delivery?',
+                    title: 'Завершить доставку?',
                     icon: 'question',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, Complete',
+                    confirmButtonText: 'Да, завершить',
                     showLoaderOnConfirm: true,
                     preConfirm: () => $.post(url, {_token: "{{ csrf_token() }}"})
                 }).then((result) => { if(result.isConfirmed){ location.reload(); } });
@@ -377,10 +377,10 @@
                 const $btn = $(this);
                 const url = $btn.data('url');
                 Swal.fire({
-                    title: 'Cancel Delivery?',
+                    title: 'Отменить доставку?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, Cancel',
+                    confirmButtonText: 'Да, отменить',
                     showLoaderOnConfirm: true,
                     preConfirm: () => $.post(url, {_token: "{{ csrf_token() }}"})
                 }).then((result) => { if(result.isConfirmed){ location.reload(); } });
@@ -391,10 +391,10 @@
                 const $btn = $(this);
                 const url = $btn.data('url');
                 Swal.fire({
-                    title: 'Mark as Failed?',
+                    title: 'Отметить как неудачную?',
                     icon: 'error',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, Mark Failed',
+                    confirmButtonText: 'Да, отметить',
                     showLoaderOnConfirm: true,
                     preConfirm: () => $.post(url, {_token: "{{ csrf_token() }}"})
                 }).then((result) => { if(result.isConfirmed){ location.reload(); } });

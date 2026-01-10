@@ -35,7 +35,7 @@
                 <div class="menu-item {{active_link(['dashboard.index'])}} menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                     <span class="menu-link">
                         <a href="{{route('dashboard.index')}}" class="menu-title">
-                            {{ __('Dashboard') }}
+                            Панель управления
                         </a>
                     </span>
                 </div>
@@ -43,7 +43,7 @@
                 <div class="menu-item {{active_link(['dashboard.order.*'])}} menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                     <span class="menu-link">
                         <a href="{{route('dashboard.order.index')}}" class="menu-title">
-                            Orders
+                            Заказы
                         </a>
                     </span>
                 </div>
@@ -53,7 +53,7 @@
                      class="menu-item {{active_link(['dashboards.users.*', 'dashboard.merchants.*', 'dashboard.admins.*'])}} menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                     <span class="menu-link">
                         <span  class="menu-title">
-                            Users
+                            Пользователи
                         </span>
                         <span class="menu-arrow d-lg-none"></span>
                     </span>
@@ -66,7 +66,7 @@
                                data-bs-placement="right">
                                 <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
                                 <span class="menu-title" >
-                                    Administrators
+                                    Администраторы
                                 </span>
                             </a>
                         </div>
@@ -79,7 +79,7 @@
                                data-bs-placement="right">
                                 <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
                                 <span class="menu-title" >
-                                    Merchants
+                                    Мерчанты
                                 </span>
                             </a>
                         </div>
@@ -92,7 +92,7 @@
                                data-bs-placement="right">
                                 <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
                                 <span class="menu-title" >
-                                    Couriers
+                                    Курьеры
                                 </span>
                             </a>
                         </div>
@@ -105,7 +105,7 @@
                                data-bs-placement="right">
                                 <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
                                 <span class="menu-title" >
-                                    Operators
+                                    Операторы
                                 </span>
                             </a>
                         </div>
@@ -116,7 +116,7 @@
                 <div class="menu-item {{active_link(['dashboard.warehouses.*'])}} menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                     <span class="menu-link">
                         <a href="{{route('dashboard.warehouses.index')}}" class="menu-title">
-                            Warehouses
+                            Склады
                         </a>
                     </span>
                 </div>
@@ -126,7 +126,7 @@
                      class="menu-item {{active_link(['dashboard.delivery-zones.*', 'dashboard.delivery-rates.*'])}} menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                     <span class="menu-link">
                         <span  class="menu-title">
-                            Delivery
+                            Доставка
                         </span>
                         <span class="menu-arrow d-lg-none"></span>
                     </span>
@@ -139,7 +139,7 @@
                                data-bs-placement="right">
                                 <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
                                 <span class="menu-title" >
-                                    Tariffs
+                                    Тарифы
                                 </span>
                             </a>
                         </div>
@@ -152,7 +152,7 @@
                                data-bs-placement="right">
                                 <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
                                 <span class="menu-title" >
-                                    Zones
+                                    Зоны
                                 </span>
                             </a>
                         </div>
@@ -164,7 +164,7 @@
                 <div class="menu-item {{active_link(['dashboard.reports.*'])}} menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                     <span class="menu-link">
                         <a href="" class="menu-title">
-                            {{ __('Reports') }}
+                            Отчеты
                         </a>
                     </span>
                 </div>

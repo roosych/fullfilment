@@ -100,7 +100,7 @@ class MerchantController extends Controller
         return redirect()->route('dashboard.merchants.index')
             ->with('alert', [
                 'type' => 'success',
-                'message' => 'Merchant created successfully! Phone: ' . $user->phone . ', Password: ' . $plainPassword,
+                'message' => 'Мерчант успешно создан! Телефон: ' . $user->phone . ', Пароль: ' . $plainPassword,
             ]);
     }
 
@@ -140,7 +140,7 @@ class MerchantController extends Controller
         return response()->json([
             'success' => true,
             'balance' => $merchant->balance,
-            'message' => 'Merchant balance updated successfully.'
+            'message' => 'Баланс мерчанта успешно обновлен.'
         ]);
     }
 
@@ -227,7 +227,7 @@ class MerchantController extends Controller
         return redirect()->route('dashboard.merchants.show', $merchant)
             ->with('alert', [
                 'type' => 'success',
-                'message' => 'Merchant updated successfully!',
+                'message' => 'Мерчант успешно обновлен!',
             ]);
     }
 
@@ -237,7 +237,7 @@ class MerchantController extends Controller
         if (!$merchant->user || !$merchant->user->hasRole(UserRoleEnum::MERCHANT->value)) {
             return response()->json([
                 'success' => false,
-                'message' => 'User is not a merchant',
+                'message' => 'Пользователь не является мерчантом',
             ], 422);
         }
 
@@ -249,7 +249,7 @@ class MerchantController extends Controller
         return response()->json([
             'success' => true,
             'active' => $user->active,
-            'message' => $user->active ? 'Merchant activated successfully' : 'Merchant deactivated successfully',
+            'message' => $user->active ? 'Мерчант успешно активирован' : 'Мерчант успешно деактивирован',
         ]);
     }
 

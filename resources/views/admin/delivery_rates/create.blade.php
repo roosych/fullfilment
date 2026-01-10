@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'New Delivery Tariff')
+@section('title', 'Новый тариф доставки')
 
 @section('content')
     @if(session('alert'))
@@ -18,7 +18,7 @@
 
                 {{-- Tariff title --}}
                 <div class="row mb-7">
-                    <label class="col-md-3 col-form-label text-md-end required">Title</label>
+                    <label class="col-md-3 col-form-label text-md-end required">Название</label>
                     <div class="col-md-9">
                         <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
                     </div>
@@ -26,7 +26,7 @@
 
                 {{-- Description --}}
                 <div class="row mb-7">
-                    <label class="col-md-3 col-form-label text-md-end">Description</label>
+                    <label class="col-md-3 col-form-label text-md-end">Описание</label>
                     <div class="col-md-9">
                         <input type="text" name="description" class="form-control" value="{{ old('description') }}">
                     </div>
@@ -54,21 +54,21 @@
                                                 <input type="number" step="1"
                                                        name="zones[{{ $zone->id }}][{{ $loop->index }}][min_weight]"
                                                        class="form-control"
-                                                       placeholder="Min weight (g)"
+                                                       placeholder="Мин. вес (г)"
                                                        value="{{ old("zones.{$zone->id}.{$loop->index}.min_weight", $interval['min_weight'] ?? '') }}">
                                             </div>
                                             <div class="col-md-3">
                                                 <input type="number" step="1"
                                                        name="zones[{{ $zone->id }}][{{ $loop->index }}][max_weight]"
                                                        class="form-control"
-                                                       placeholder="Max weight (g)"
+                                                       placeholder="Макс. вес (г)"
                                                        value="{{ old("zones.{$zone->id}.{$loop->index}.max_weight", $interval['max_weight'] ?? '') }}">
                                             </div>
                                             <div class="col-md-3">
                                                 <input type="number" step="0.01"
                                                        name="zones[{{ $zone->id }}][{{ $loop->index }}][price]"
                                                        class="form-control"
-                                                       placeholder="Price (₼)"
+                                                       placeholder="Цена (₼)"
                                                        value="{{ old("zones.{$zone->id}.{$loop->index}.price", isset($interval['price']) ? $interval['price'] / 100 : '') }}">
                                             </div>
                                             <div class="col-md-2 d-flex align-items-center">
@@ -79,10 +79,10 @@
                                                        name="zones[{{ $zone->id }}][{{ $loop->index }}][active]"
                                                        class="form-check-input me-2"
                                                        value="1"
-                                                    {{ old("zones.{$zone->id}.{$loop->index}.active", $interval['active'] ?? true) ? 'checked' : '' }}> Active
+                                                    {{ old("zones.{$zone->id}.{$loop->index}.active", $interval['active'] ?? true) ? 'checked' : '' }}> Активен
                                             </div>
                                             <div class="col-md-1">
-                                                <button type="button" data-repeater-delete class="btn btn-light-danger">Delete</button>
+                                                <button type="button" data-repeater-delete class="btn btn-light-danger">Удалить</button>
                                             </div>
                                         </div>
                                     @endforeach
@@ -90,7 +90,7 @@
 
                                 <div class="mt-3">
                                     <button type="button" data-repeater-create class="btn btn-light-primary">
-                                        <i class="ki-duotone ki-plus fs-3"></i> Add Range
+                                        <i class="ki-duotone ki-plus fs-3"></i> Добавить диапазон
                                     </button>
                                 </div>
                             </div>
@@ -103,8 +103,8 @@
                 {{-- Submit --}}
                 <div class="row py-5">
                     <div class="col-md-9 offset-md-3">
-                        <button type="submit" class="btn btn-primary">Create</button>
-                        <a href="{{ route('dashboard.delivery-rates.index') }}" class="btn btn-light">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Создать</button>
+                        <a href="{{ route('dashboard.delivery-rates.index') }}" class="btn btn-light">Отмена</a>
                     </div>
                 </div>
 
@@ -134,7 +134,7 @@
         <script>
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'Упс...',
                 html: `{!! implode('<br>', $errors->all()) !!}`
             });
         </script>

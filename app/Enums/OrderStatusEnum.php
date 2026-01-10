@@ -21,11 +21,11 @@ enum OrderStatusEnum: string
     public function label(): string
     {
         return match($this) {
-            self::CREATED => 'Created',
-            self::READY_FOR_DELIVERY => 'Ready for Delivery',
-            self::DELIVERY_IN_PROGRESS => 'Delivery in Progress',
-            self::DELIVERED => 'Delivered',
-            self::CANCELLED => 'Cancelled',
+            self::CREATED => 'Создан',
+            self::READY_FOR_DELIVERY => 'Готов к доставке',
+            self::DELIVERY_IN_PROGRESS => 'В пути',
+            self::DELIVERED => 'Доставлен',
+            self::CANCELLED => 'Отменен',
         };
     }
 

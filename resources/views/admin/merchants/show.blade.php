@@ -1,17 +1,17 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Merchants - ' . $merchant->user->name)
+@section('title', 'Мерчанты - ' . $merchant->user->name)
 
 @section('breadcrumbs')
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
         <li class="breadcrumb-item text-muted">
-            <a href="{{route('dashboard.index')}}" class="text-muted text-hover-primary">Dashboard</a>
+            <a href="{{route('dashboard.index')}}" class="text-muted text-hover-primary">Панель управления</a>
         </li>
         <li class="breadcrumb-item">
             <span class="bullet bg-gray-500 w-5px h-2px"></span>
         </li>
         <li class="breadcrumb-item text-muted">
-            <a href="{{route('dashboard.merchants.index')}}" class="text-muted text-hover-primary">Merchants</a>
+            <a href="{{route('dashboard.merchants.index')}}" class="text-muted text-hover-primary">Мерчанты</a>
         </li>
         <li class="breadcrumb-item">
             <span class="bullet bg-gray-500 w-5px h-2px"></span>
@@ -31,10 +31,10 @@
             Редактировать
         </a>
         <a href="#" class="btn btn-sm btn-flex btn-center btn-dark px-4" data-bs-toggle="modal" data-bs-target="#stockReceiveModal">
-            Stock In
+            Прием товара
         </a>
         <a href="#" class="btn btn-flex btn-sm btn-color-gray-700 bg-body fw-bold px-4">
-            Reports
+            Отчеты
         </a>
     </div>
 @endsection
@@ -106,13 +106,13 @@
             <!-- Tabs -->
             <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-8">
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#merchant_overview">Overview</a>
+                    <a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#merchant_overview">Обзор</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#merchant_transactions">Transactions</a>
+                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#merchant_transactions">Транзакции</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#merchant_orders">Orders</a>
+                    <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#merchant_orders">Заказы</a>
                 </li>
             </ul>
 
@@ -120,7 +120,7 @@
             <div class="tab-content" id="myTabContent">
 
                 {{-- =============================
-                    TAB 1 — OVERVIEW
+                    ВКЛАДКА 1 — ОБЗОР
                 ============================= --}}
                 <div class="tab-pane fade show active" id="merchant_overview" role="tabpanel">
 
@@ -130,7 +130,7 @@
                         <div class="col">
                             <div class="card pt-4 h-md-100 mb-6 mb-md-0">
                                 <div class="card-header border-0 d-flex justify-content-between align-items-center">
-                                    <h2 class="fw-bold mb-0">Balance</h2>
+                                    <h2 class="fw-bold mb-0">Баланс</h2>
 
                                     <button type="button" class="btn btn-sm btn-light-success"
                                             data-bs-toggle="modal" data-bs-target="#top_up_modal"
@@ -138,7 +138,7 @@
                                         <i class="ki-duotone ki-plus-square fs-2 p-0 me-2">
                                             <span class="path1"></span><span class="path2"></span><span class="path3"></span>
                                         </i>
-                                        Top up
+                                        Пополнить
                                     </button>
                                 </div>
 
@@ -172,8 +172,8 @@
                                         <span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span>
                                     </i>
 
-                                    <div class="text-white fw-bold fs-2 mt-5">Stock Overview</div>
-                                    <div class="fw-semibold text-white">Available stock in all warehouses.</div>
+                                    <div class="text-white fw-bold fs-2 mt-5">Обзор склада</div>
+                                    <div class="fw-semibold text-white">Доступный товар на всех складах.</div>
                                 </div>
                             </a>
                         </div>
@@ -239,7 +239,7 @@
                 </div> <!-- END TAB 1 -->
 
                 {{-- =============================
-                    TAB 2 — TRANSACTIONS
+                    ВКЛАДКА 2 — ТРАНЗАКЦИИ
                 ============================= --}}
                 <div class="tab-pane fade" id="merchant_transactions" role="tabpanel">
 
@@ -247,7 +247,7 @@
                     <div class="card pt-4 mb-6 mb-xl-9">
                         <div class="card-header border-0">
                             <div class="card-title">
-                                <h2>Balance Transactions</h2>
+                                <h2>Транзакции баланса</h2>
                             </div>
                         </div>
 

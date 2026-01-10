@@ -18,7 +18,7 @@
                 <span class="path2"></span>
                 <span class="path3"></span></i>
             <span class="ms-2 d-none d-lg-block">
-                Stock In
+                Прием товара
             </span>
         </a>
 
@@ -34,7 +34,7 @@
                 <span class="path3"></span>
             </i>
             <span class="ms-2 d-none d-lg-block">
-                Order
+                Заказ
             </span>
         </a>
     @elseif(Auth::user()->hasRole('merchant'))

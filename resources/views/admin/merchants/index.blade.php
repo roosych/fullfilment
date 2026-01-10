@@ -1,19 +1,19 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Merchants')
+@section('title', 'Мерчанты')
 
 @section('breadcrumbs')
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
         <li class="breadcrumb-item text-muted">
             <a href="{{route('dashboard.index')}}" class="text-muted text-hover-primary">
-                Dashboard
+                Панель управления
             </a>
         </li>
         <li class="breadcrumb-item">
             <span class="bullet bg-gray-500 w-5px h-2px"></span>
         </li>
         <li class="breadcrumb-item text-muted">
-            Merchants
+            Мерчанты
         </li>
     </ul>
 @endsection
@@ -26,7 +26,7 @@
                 <span class="path2"></span>
                 <span class="path3"></span>
             </i>
-            Add merchant
+            Добавить мерчанта
         </a>
     </div>
 @endsection
@@ -45,7 +45,7 @@
                     <span class="path3"></span>
                 </i>
                 <input type="text" merchant-filter="search" class="form-control form-control-solid w-250px ps-12"
-                       placeholder="Search..."/>
+                       placeholder="Поиск..."/>
             </div>
 
             <div id="output" class="text-success fs-5 fw-bold output my-5"></div>
@@ -59,7 +59,7 @@
                     <th class="text-center">{{__('Completed deliveries')}}</th>
                     <th class="text-center">{{__('Balance')}}</th>
                     <th class="text-end">{{__('Status')}}</th>
-                    <th class="text-end">Actions</th>
+                    <th class="text-end">Действия</th>
                 </tr>
                 </thead>
                 <tbody class="fw-semibold text-gray-600">
@@ -143,16 +143,16 @@
                             <a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary"
                                data-kt-menu-trigger="click"
                                data-kt-menu-placement="bottom-end">
-                                Actions
+                                Действия
                                 <i class="ki-duotone ki-down fs-5 ms-1"><span class="path1"></span></i>
                             </a>
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4"
                                  data-kt-menu="true">
                                 <div class="menu-item px-3">
-                                    <a href="{{route('dashboard.merchants.show', $merchant)}}" class="menu-link px-3">View</a>
+                                    <a href="{{route('dashboard.merchants.show', $merchant)}}" class="menu-link px-3">Просмотр</a>
                                 </div>
                                 <div class="menu-item px-3">
-                                    <a href="{{route('dashboard.merchants.stock', $merchant)}}" class="menu-link px-3">Stock</a>
+                                    <a href="{{route('dashboard.merchants.stock', $merchant)}}" class="menu-link px-3">Склад</a>
                                 </div>
                             </div>
                         </td>
@@ -207,7 +207,7 @@
                             if (typeof Swal !== 'undefined') {
                                 Swal.fire({
                                     icon: 'success',
-                                    title: 'Success',
+                                    title: 'Успешно',
                                     text: response.message,
                                     timer: 2000,
                                     showConfirmButton: false,
@@ -221,13 +221,13 @@
                         // Откатываем состояние чекбокса при ошибке
                         $checkbox.prop('checked', previousState);
                         
-                        const message = xhr.responseJSON?.message || 'An error occurred while updating the status';
+                        const message = xhr.responseJSON?.message || 'Произошла ошибка при обновлении статуса';
                         
                         // Показываем уведомление об ошибке, если Swal доступен
                         if (typeof Swal !== 'undefined') {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Error',
+                                title: 'Ошибка',
                                 text: message,
                                 timer: 3000,
                                 showConfirmButton: false,

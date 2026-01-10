@@ -27,7 +27,7 @@ class DeliveryRateController extends Controller
                 ->route('dashboard.delivery-zones.create')
                 ->with('alert', [
                     'type' => 'warning',
-                    'message' => 'Create at least one delivery zone before adding a rate.'
+                    'message' => 'Сначала создайте хотя бы одну зону доставки перед добавлением тарифа.'
                 ]);
         }
 
@@ -78,7 +78,7 @@ class DeliveryRateController extends Controller
 
         return redirect()
             ->route('dashboard.delivery-rates.index')
-            ->with('success', 'Rate created successfully.');
+            ->with('success', 'Тариф успешно создан.');
     }
 
     public function edit(DeliveryRate $deliveryRate)
@@ -135,13 +135,13 @@ class DeliveryRateController extends Controller
 
         return redirect()
             ->route('dashboard.delivery-rates.index')
-            ->with('success', 'Rate updated successfully.');
+            ->with('success', 'Тариф успешно обновлен.');
     }
 
     public function destroy(DeliveryRate $deliveryRate)
     {
         $deliveryRate->delete();
-        return redirect()->route('dashboard.delivery-rates.index')->with('success', 'Rate deleted.');
+        return redirect()->route('dashboard.delivery-rates.index')->with('success', 'Тариф успешно удален.');
     }
 
     public function getZones($rateId)
@@ -180,17 +180,17 @@ class DeliveryRateController extends Controller
                 // Если указана цена, то должны быть min и max
                 if (!empty($interval['price'])) {
                     if (empty($interval['min_weight']) && $interval['min_weight'] !== '0' && $interval['min_weight'] !== 0) {
-                        $errors["zones.$zoneId.$index.min_weight"] = "Min weight is required when price is specified.";
+                        $errors["zones.$zoneId.$index.min_weight"] = "Минимальный вес обязателен при указании цены.";
                     }
                     if (empty($interval['max_weight']) && $interval['max_weight'] !== '0' && $interval['max_weight'] !== 0) {
-                        $errors["zones.$zoneId.$index.max_weight"] = "Max weight is required when price is specified.";
+                        $errors["zones.$zoneId.$index.max_weight"] = "Максимальный вес обязателен при указании цены.";
                     }
                 }
 
                 // Проверяем что max >= min (только если оба заполнены)
                 if (isset($interval['min_weight']) && isset($interval['max_weight'])) {
                     if ($interval['max_weight'] < $interval['min_weight']) {
-                        $errors["zones.$zoneId.$index.max_weight"] = "Max weight must be greater than or equal to min weight.";
+                        $errors["zones.$zoneId.$index.max_weight"] = "Максимальный вес должен быть больше или равен минимальному весу.";
                     }
                 }
             }
@@ -233,7 +233,7 @@ class DeliveryRateController extends Controller
                 // [0-1000] и [500-2500] - ОШИБКА (500 < 1000)
                 if ($next['min_weight'] < $current['max_weight']) {
                     $errors["zones.$zoneId"] = sprintf(
-                        "Weight ranges overlap in %s: [%s-%s g] and [%s-%s g]",
+                        "Диапазоны веса пересекаются в %s: [%s-%s г] и [%s-%s г]",
                         $zoneName,
                         $current['min_weight'],
                         $current['max_weight'],

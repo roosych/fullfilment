@@ -120,7 +120,7 @@ class StockController extends Controller
         if (!$data || empty($data['products'])) {
             return redirect()
                 ->route('dashboard.stock.create', [$merchant, $warehouse])
-                ->with('error', 'No data to save.');
+                ->with('error', 'Нет данных для сохранения.');
         }
 
         // Создаём партию в транзакции

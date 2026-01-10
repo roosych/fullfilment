@@ -1,12 +1,12 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Add Administrator')
+@section('title', 'Добавить администратора')
 
 @section('breadcrumbs')
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
         <li class="breadcrumb-item text-muted">
             <a href="{{route('dashboard.index')}}" class="text-muted text-hover-primary">
-                Main
+                Панель управления
             </a>
         </li>
         <li class="breadcrumb-item">
@@ -14,7 +14,7 @@
         </li>
         <li class="breadcrumb-item text-muted">
             <a href="{{route('dashboard.admins.index')}}" class="text-muted text-hover-primary">
-                Administrators
+                Администраторы
             </a>
         </li>
         <li class="breadcrumb-item">

@@ -43,7 +43,7 @@
                         <input type="text"
                                id="top_up_input"
                                class="form-control form-control-solid"
-                               placeholder="Enter Amount"
+                               placeholder="Введите сумму"
                                name="topup_amount">
                     </div>
 
@@ -113,17 +113,17 @@
 
                         Swal.fire({
                             icon: 'success',
-                            title: 'Balance Updated',
+                            title: 'Баланс обновлен',
                             text: response.message
                         });
                         $('#top_up_modal').modal('hide');
                     },
                     error: function (xhr, status, error) {
                         removeWait($('body'));
-                        const message = getAjaxErrorMessage(xhr) || 'Something went wrong';
+                        const message = getAjaxErrorMessage(xhr) || 'Произошла ошибка';
                         Swal.fire({
                             icon: 'error',
-                            title: 'Error!',
+                            title: 'Ошибка!',
                             html: message
                         });
                     }

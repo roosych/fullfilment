@@ -1,19 +1,19 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Delivery zones')
+@section('title', 'Зоны доставки')
 
 @section('breadcrumbs')
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
         <li class="breadcrumb-item text-muted">
             <a href="{{route('dashboard.index')}}" class="text-muted text-hover-primary">
-                Dashboard
+                Панель управления
             </a>
         </li>
         <li class="breadcrumb-item">
             <span class="bullet bg-gray-500 w-5px h-2px"></span>
         </li>
         <li class="breadcrumb-item text-muted">
-            Delivery tariffs
+            Тарифы доставки
         </li>
     </ul>
 @endsection
@@ -37,21 +37,21 @@
 
             <!-- Форма создания/редактирования зоны -->
             <div class="col-md-4">
-                <h4>Add zone</h4>
-                <form id="zone_form" action="{{route('dashboard.delivery-zones.store')}}" method="POST">
-                    @csrf
-                    <input type="hidden" name="polygon_coordinates" id="polygon_coordinates">
+            <h4>Добавить зону</h4>
+            <form id="zone_form" action="{{route('dashboard.delivery-zones.store')}}" method="POST">
+                @csrf
+                <input type="hidden" name="polygon_coordinates" id="polygon_coordinates">
 
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Zone Name</label>
-                        <input type="text" class="form-control" name="name" required>
-                    </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Название зоны</label>
+                    <input type="text" class="form-control" name="name" required>
+                </div>
 
-                    <button class="btn btn-primary mt-2">Save Zone</button>
-                </form>
+                <button class="btn btn-primary mt-2">Сохранить зону</button>
+            </form>
 
-                <!-- Список зон и тарифов -->
-                <h5 class="mt-4">Existing Zones</h5>
+            <!-- Список зон и тарифов -->
+            <h5 class="mt-4">Существующие зоны</h5>
                 <ul class="list-group">
                     @foreach($zones as $zone)
                         <li class="list-group-item">

@@ -35,7 +35,7 @@ class DeliveryZoneController extends Controller
             ->route('dashboard.delivery-zones.index')
             ->with('alert', [
                 'type' => 'success',
-                'message' => "Delivery zone '{$zone->name}' created successfully.",
+                'message' => "Зона доставки '{$zone->name}' успешно создана.",
             ]);
     }
 
@@ -53,13 +53,13 @@ class DeliveryZoneController extends Controller
 
         $deliveryZone->update($data);
 
-        return redirect()->route('admin.delivery-zones.index')->with('success', 'Zone updated.');
+        return redirect()->route('admin.delivery-zones.index')->with('success', 'Зона успешно обновлена.');
     }
 
     public function destroy(DeliveryZone $deliveryZone)
     {
         $deliveryZone->delete();
-        return redirect()->route('admin.delivery-zones.index')->with('success', 'Zone deleted.');
+        return redirect()->route('admin.delivery-zones.index')->with('success', 'Зона успешно удалена.');
     }
 
     // Работа с тарифами через pivot
@@ -78,7 +78,7 @@ class DeliveryZoneController extends Controller
             'price' => $data['price'],
         ]);
 
-        return redirect()->back()->with('success', 'Rate attached to zone.');
+        return redirect()->back()->with('success', 'Тариф успешно привязан к зоне.');
     }
 
     public function updateRate(Request $request, DeliveryZone $deliveryZone, DeliveryRate $rate)
@@ -91,13 +91,13 @@ class DeliveryZoneController extends Controller
 
         $deliveryZone->rates()->updateExistingPivot($rate->id, $data);
 
-        return redirect()->back()->with('success', 'Rate updated for zone.');
+        return redirect()->back()->with('success', 'Тариф успешно обновлен для зоны.');
     }
 
     public function detachRate(DeliveryZone $deliveryZone, DeliveryRate $rate)
     {
         $deliveryZone->rates()->detach($rate->id);
 
-        return redirect()->back()->with('success', 'Rate removed from zone.');
+        return redirect()->back()->with('success', 'Тариф успешно удален из зоны.');
     }
 }

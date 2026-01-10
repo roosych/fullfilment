@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Add merchant')
+@section('title', 'Добавить мерчанта')
 
 @section('breadcrumbs')
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -14,7 +14,7 @@
         </li>
         <li class="breadcrumb-item text-muted">
             <a href="{{route('dashboard.merchants.index')}}" class="text-muted text-hover-primary">
-                Merchants
+                Мерчанты
             </a>
         </li>
         <li class="breadcrumb-item">

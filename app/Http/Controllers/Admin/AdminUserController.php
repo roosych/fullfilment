@@ -72,8 +72,8 @@ class AdminUserController extends Controller
         });
 
         $passwordMessage = isset($data['password']) 
-            ? 'Админ создан успешно!' 
-            : 'Админ создан успешно! Пароль: ' . $plainPassword;
+            ? 'Администратор создан успешно!' 
+            : 'Администратор создан успешно! Пароль: ' . $plainPassword;
 
         return redirect()->route('dashboard.admins.index')
             ->with('alert', [
@@ -88,7 +88,7 @@ class AdminUserController extends Controller
         if (!$user->hasRole(UserRoleEnum::ADMIN->value)) {
             return response()->json([
                 'success' => false,
-                'message' => 'User is not an administrator',
+                'message' => 'Пользователь не является администратором',
             ], 422);
         }
 
@@ -96,7 +96,7 @@ class AdminUserController extends Controller
         if ($user->id === auth()->id()) {
             return response()->json([
                 'success' => false,
-                'message' => 'You cannot deactivate yourself',
+                'message' => 'Вы не можете деактивировать себя',
             ], 422);
         }
 
@@ -107,7 +107,7 @@ class AdminUserController extends Controller
         return response()->json([
             'success' => true,
             'active' => $user->active,
-            'message' => $user->active ? 'Administrator activated successfully' : 'Administrator deactivated successfully',
+            'message' => $user->active ? 'Администратор успешно активирован' : 'Администратор успешно деактивирован',
         ]);
     }
 }

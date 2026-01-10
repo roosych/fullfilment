@@ -16,11 +16,11 @@ enum DeliveryStatusEnum: string
     public function label(): string
     {
         return match($this) {
-            self::CREATED => 'Created',
-            self::ON_THE_WAY => 'On the Way',
-            self::DELIVERED => 'Delivered',
-            self::FAILED => 'Failed',
-            self::RETURNED => 'Returned',
+            self::CREATED => 'Создана',
+            self::ON_THE_WAY => 'В пути',
+            self::DELIVERED => 'Доставлена',
+            self::FAILED => 'Неудачная',
+            self::RETURNED => 'Возвращена',
         };
     }
 

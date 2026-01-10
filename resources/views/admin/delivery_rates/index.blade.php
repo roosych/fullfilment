@@ -1,16 +1,16 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Delivery tariffs')
+@section('title', 'Тарифы доставки')
 
 @section('breadcrumbs')
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
         <li class="breadcrumb-item text-muted">
-            <a href="{{route('dashboard.index')}}" class="text-muted text-hover-primary">Dashboard</a>
+            <a href="{{route('dashboard.index')}}" class="text-muted text-hover-primary">Панель управления</a>
         </li>
         <li class="breadcrumb-item">
             <span class="bullet bg-gray-500 w-5px h-2px"></span>
         </li>
-        <li class="breadcrumb-item text-muted">Delivery tariffs</li>
+        <li class="breadcrumb-item text-muted">Тарифы доставки</li>
     </ul>
 @endsection
 
@@ -25,7 +25,7 @@
                     <span class="path2"></span>
                     <span class="path3"></span>
                 </i>
-                Add tariff
+                Добавить тариф
             </a>
         </div>
     @endsection
@@ -51,11 +51,11 @@
                         </i>
                         <div class="d-flex flex-stack flex-grow-1">
                             <div class="fw-semibold">
-                                <h4 class="text-gray-900 fw-bold">No delivery zones found</h4>
+                                <h4 class="text-gray-900 fw-bold">Зоны доставки не найдены</h4>
                                 <div class="fs-6 text-gray-700">
-                                    To create or assign delivery rates, you first need to set up at least one delivery zone.
-                                    Please <a href="{{ route('dashboard.delivery-zones.index') }}" class="fw-bold text-hover-warning">
-                                        create a delivery zone</a> to proceed.
+                                    Чтобы создать или назначить тарифы доставки, сначала нужно настроить хотя бы одну зону доставки.
+                                    Пожалуйста, <a href="{{ route('dashboard.delivery-zones.index') }}" class="fw-bold text-hover-warning">
+                                        создайте зону доставки</a> для продолжения.
                                 </div>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                             </div>
                             <div class="card-toolbar">
                                 <a href="{{route('dashboard.delivery-rates.edit', $rate)}}" class="btn btn-light btn-sm">
-                                    View
+                                    Просмотр
                                 </a>
                             </div>
                         </div>
@@ -88,9 +88,9 @@
                                     <table class="table mb-3 align-middle">
                                         <thead>
                                         <tr class="border-bottom fs-6 fw-bold text-muted">
-                                            <th class="min-w-175px pb-2">Zone</th>
-                                            <th class="min-w-150px text-end pb-2">Weight</th>
-                                            <th class="min-w-100px text-end pb-2">Price</th>
+                                            <th class="min-w-175px pb-2">Зона</th>
+                                            <th class="min-w-150px text-end pb-2">Вес</th>
+                                            <th class="min-w-100px text-end pb-2">Цена</th>
                                         </tr>
                                         </thead>
 
@@ -102,7 +102,7 @@
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
                                                     </i>
-                                                    {{ $prices->first()->zone->name ?? 'Unknown zone' }}
+                                                    {{ $prices->first()->zone->name ?? 'Неизвестная зона' }}
                                                 </td>
                                                 <td class="pt-4">
                                                     @foreach($prices as $price)
@@ -124,7 +124,7 @@
                                         @empty
                                             <tr>
                                                 <td colspan="4" class="text-center py-6 text-muted">
-                                                    No delivery zones assigned for this rate.
+                                                    Для этого тарифа не назначены зоны доставки.
                                                 </td>
                                             </tr>
                                         @endforelse
@@ -149,9 +149,9 @@
                                 </i>
                                 <div class="d-flex flex-stack flex-grow-1">
                                     <div class="fw-semibold">
-                                        <h4 class="text-gray-900 fw-bold">No tariffs found</h4>
+                                        <h4 class="text-gray-900 fw-bold">Тарифы не найдены</h4>
                                         <div class="fs-6 text-gray-700">
-                                            You haven’t created any delivery tariffs yet. Click “Add tariff” to create one.
+                                            Вы еще не создали ни одного тарифа доставки. Нажмите "Добавить тариф", чтобы создать один.
                                         </div>
                                     </div>
                                 </div>

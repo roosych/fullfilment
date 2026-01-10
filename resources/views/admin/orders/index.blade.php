@@ -26,7 +26,7 @@
                 <span class="path2"></span>
                 <span class="path3"></span>
             </i>
-            Create order
+            Создать заказ
         </a>
     </div>
 @endsection
@@ -40,18 +40,22 @@
         <div class="card-header align-items-center py-5 gap-2 gap-md-5">
             <div class="card-title">
                 <div class="d-flex align-items-center position-relative my-1">
-                    <i class="ki-outline ki-magnifier fs-3 position-absolute ms-4"></i>
+                    <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-4">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                        <span class="path3"></span>
+                    </i>
                     <input type="text"
                            data-kt-ecommerce-order-filter="search"
                            class="form-control form-control-solid w-250px ps-12"
-                           placeholder="Search Order" />
+                           placeholder="Поиск заказа" />
                 </div>
             </div>
 
             <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
                 <div class="input-group w-250px">
                     <input class="form-control form-control-solid rounded rounded-end-0"
-                           placeholder="Pick date range"
+                           placeholder="Выберите диапазон дат"
                            id="kt_ecommerce_sales_flatpickr" />
                     <button class="btn btn-icon btn-light"
                             id="kt_ecommerce_sales_flatpickr_clear">
@@ -64,7 +68,7 @@
                     <select class="form-select form-select-solid"
                             data-control="select2"
                             data-hide-search="true"
-                            data-placeholder="Status"
+                            data-placeholder="Статус"
                             data-kt-ecommerce-order-filter="status">
                         <option></option>
                         <option value="all">All</option>
@@ -86,12 +90,12 @@
                 <thead>
                 <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                     <th class="">ID</th>
-                    <th class="min-w-175px">Merchant</th>
-                    <th class="text-center min-w-70px">Status</th>
-                    <th class="text-center min-w-100px">Items / Qty</th>
-                    <th class="text-center min-w-100px">Created</th>
-                    <th class="text-center min-w-100px">Delivery status</th>
-                    <th class="text-end min-w-100px">Actions</th>
+                    <th class="min-w-175px">Мерчант</th>
+                    <th class="text-center min-w-70px">Статус</th>
+                    <th class="text-center min-w-100px">Товары / Кол-во</th>
+                    <th class="text-center min-w-100px">Создан</th>
+                    <th class="text-center min-w-100px">Статус доставки</th>
+                    <th class="text-end min-w-100px">Действия</th>
                 </tr>
                 </thead>
                 <tbody class="fw-semibold text-gray-600">
@@ -131,7 +135,7 @@
                                         {{ $order->delivery->status->label() }}
                                     </div>
                                 @else
-                                    Not created
+                                    Не создана
                                 @endif
                             </td>
                             <td class="text-end">

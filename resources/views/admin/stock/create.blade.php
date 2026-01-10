@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Stock In - ' . $merchant->user->name)
+@section('title', 'Прием товара - ' . $merchant->user->name)
 
 @section('content')
     <div class="mb-7">
@@ -8,11 +8,11 @@
             <i class="ki-outline ki-box fs-2tx text-primary me-4"></i>
             <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
                 <div class="mb-3 mb-md-0 fw-semibold">
-                    <h4 class="text-gray-900 fw-bold">New Stock Entry</h4>
+                    <h4 class="text-gray-900 fw-bold">Новая запись товара</h4>
                     <div class="fs-6 text-gray-700 pe-7">
-                        Adding products to
+                        Добавление товаров на
                         <span class="fw-bold text-gray-800 fs-5">{{$warehouse->name}}</span>
-                        for
+                        для
                         <a href="{{route('dashboard.merchants.show', $merchant)}}" target="_blank"
                            class="fw-bold text-gray-800 text-hover-primary fs-5">
                             {{$merchant->user->name}}
@@ -23,7 +23,7 @@
                 <button type="button" class="btn btn-primary px-6 align-self-center text-nowrap"
                         data-bs-toggle="modal"
                         data-bs-target="#stockReceiveModal">
-                    Change
+                    Изменить
                 </button>
             </div>
         </div>
@@ -41,22 +41,22 @@
                                         <div class="d-flex flex-wrap align-items-end gap-3">
                                             <!-- Product Select / New Product Input -->
                                             <div class="flex-grow-1 min-w-200">
-                                                <label class="form-label">Product:</label>
-                                                <select name="product_id" class="form-select product-select" data-placeholder="Select a product" required>
-                                                    <option value="">-- Select a product --</option>
-                                                    <option value="new" @if(is_null($oldProduct['product_id'])) selected @endif>+ Add new product</option>
+                                                <label class="form-label">Товар:</label>
+                                                <select name="product_id" class="form-select product-select" data-placeholder="Выберите товар" required>
+                                                    <option value="">-- Выберите товар --</option>
+                                                    <option value="new" @if(is_null($oldProduct['product_id'])) selected @endif>+ Добавить новый товар</option>
                                                     @foreach($merchant->products as $product)
                                                         <option value="{{ $product->id }}" @if($oldProduct['product_id'] == $product->id) selected @endif>{{ $product->name }}</option>
                                                     @endforeach
                                                 </select>
 
                                                 <input type="text" name="new_product_name" class="form-control form-control-solid new-product-field @if(!is_null($oldProduct['product_id'])) d-none @endif mt-2"
-                                                       placeholder="Enter new product name" value="{{ $oldProduct['new_product_name'] ?? '' }}" />
+                                                       placeholder="Введите название нового товара" value="{{ $oldProduct['new_product_name'] ?? '' }}" />
                                             </div>
 
                                             <!-- Quantity -->
                                             <div class="flex-shrink-0" style="width: 140px;">
-                                                <label class="form-label">Quantity:</label>
+                                                <label class="form-label">Количество:</label>
                                                 <input type="number" name="quantity" class="form-control form-control-solid" min="1" value="{{ $oldProduct['quantity'] ?? 1 }}" required />
                                             </div>
 
@@ -64,7 +64,7 @@
                                             <div class="flex-shrink-0">
                                                 <button type="button" data-repeater-delete class="btn btn-light-danger mt-3 mt-md-0">
                                                     <i class="ki-duotone ki-trash fs-5"></i>
-                                                    Remove
+                                                    Удалить
                                                 </button>
                                             </div>
                                         </div>
@@ -75,22 +75,22 @@
                                     <div class="d-flex flex-wrap align-items-end gap-3">
                                         <!-- Product Select / New Product Input -->
                                         <div class="flex-grow-1 min-w-200">
-                                            <label class="form-label">Product:</label>
-                                            <select name="product_id" class="form-select product-select" data-placeholder="Select a product" required>
-                                                <option value="">-- Select a product --</option>
-                                                <option value="new">+ Add new product</option>
+                                            <label class="form-label">Товар:</label>
+                                            <select name="product_id" class="form-select product-select" data-placeholder="Выберите товар" required>
+                                                <option value="">-- Выберите товар --</option>
+                                                <option value="new">+ Добавить новый товар</option>
                                                 @foreach($merchant->products as $product)
                                                     <option value="{{ $product->id }}">{{ $product->name }}</option>
                                                 @endforeach
                                             </select>
 
                                             <input type="text" name="new_product_name" class="form-control form-control-solid new-product-field d-none mt-2"
-                                                   placeholder="Enter new product name" />
+                                                   placeholder="Введите название нового товара" />
                                         </div>
 
                                         <!-- Quantity -->
                                         <div class="flex-shrink-0" style="width: 140px;">
-                                            <label class="form-label">Quantity:</label>
+                                            <label class="form-label">Количество:</label>
                                             <input type="number" name="quantity" class="form-control form-control-solid" min="1" value="1" required />
                                         </div>
 
@@ -98,7 +98,7 @@
                                         <div class="flex-shrink-0">
                                             <button type="button" data-repeater-delete class="btn btn-light-danger mt-3 mt-md-0">
                                                 <i class="ki-duotone ki-trash fs-5"></i>
-                                                Remove
+                                                Удалить
                                             </button>
                                         </div>
                                     </div>
@@ -108,7 +108,7 @@
 
                         <div class="form-group mt-8">
                             <button type="button" data-repeater-create class="btn btn-light-primary">
-                                <i class="ki-duotone ki-plus fs-3"></i> Add product
+                                <i class="ki-duotone ki-plus fs-3"></i> Добавить товар
                             </button>
                         </div>
                     </div>
@@ -117,7 +117,7 @@
         </div>
 
         <div class="d-flex justify-content-end mt-5">
-            <button type="submit" class="btn btn-primary">Preview</button>
+            <button type="submit" class="btn btn-primary">Предпросмотр</button>
         </div>
     </form>
 @endsection
@@ -131,7 +131,7 @@
                 $container.find('.product-select').each(function () {
                     if (!$(this).hasClass('select2-hidden-accessible')) {
                         $(this).select2({
-                            placeholder: $(this).data('placeholder') || 'Select a product',
+                            placeholder: $(this).data('placeholder') || 'Выберите товар',
                             minimumResultsForSearch: 0,
                             width: '100%'
                         });
