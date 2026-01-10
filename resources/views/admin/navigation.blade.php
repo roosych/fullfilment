@@ -50,7 +50,7 @@
 
                 <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
                      data-kt-menu-placement="bottom-start"
-                     class="menu-item {{active_link(['dashboards.users.*', 'dashboard.merchants.*'])}} menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
+                     class="menu-item {{active_link(['dashboards.users.*', 'dashboard.merchants.*', 'dashboard.admins.*'])}} menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                     <span class="menu-link">
                         <span  class="menu-title">
                             Users
@@ -59,7 +59,20 @@
                     </span>
                     <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px">
                         <div class="menu-item" >
-                            <a class="menu-link"  href="{{route('dashboard.merchants.index')}}" title="Список зон доставки"
+                            <a class="menu-link"  href="{{route('dashboard.admins.index')}}" title="Список администраторов"
+                               data-bs-toggle="tooltip"
+                               data-bs-trigger="hover"
+                               data-bs-dismiss="click"
+                               data-bs-placement="right">
+                                <span class="menu-bullet"><span class="bullet bullet-dot"></span></span>
+                                <span class="menu-title" >
+                                    Administrators
+                                </span>
+                            </a>
+                        </div>
+
+                        <div class="menu-item" >
+                            <a class="menu-link"  href="{{route('dashboard.merchants.index')}}" title="Список мерчантов"
                                data-bs-toggle="tooltip"
                                data-bs-trigger="hover"
                                data-bs-dismiss="click"
@@ -72,7 +85,7 @@
                         </div>
 
                         <div class="menu-item" >
-                            <a class="menu-link"  href="" title="Список зон доставки"
+                            <a class="menu-link"  href="" title="Список курьеров"
                                data-bs-toggle="tooltip"
                                data-bs-trigger="hover"
                                data-bs-dismiss="click"
@@ -85,7 +98,7 @@
                         </div>
 
                         <div class="menu-item" >
-                            <a class="menu-link"  href="" title="Список зон доставки"
+                            <a class="menu-link"  href="" title="Список операторов"
                                data-bs-toggle="tooltip"
                                data-bs-trigger="hover"
                                data-bs-dismiss="click"

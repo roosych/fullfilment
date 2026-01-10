@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\BatchController;
 use App\Http\Controllers\Admin\DeliveryController;
 use App\Http\Controllers\Admin\DeliveryRateController;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\IndexController;
 
 Route::prefix('dashboard')
-    ->middleware(['auth', 'role:admin'])
+    ->middleware(['auth', 'role:admin', 'admin.active'])
     ->name('dashboard.')
     ->group(function () {
         Route::get('/', [IndexController::class, 'index'])->name('index');
@@ -27,6 +28,11 @@ Route::prefix('dashboard')
         Route::get('merchants/{merchant}/stock', [MerchantController::class, 'stock'])->name('merchants.stock');
 
         Route::get('merchants/{merchant}/products', [OrderController::class, 'getMerchantProducts'])->name('merchant.products');
+
+        Route::get('admins', [AdminUserController::class, 'index'])->name('admins.index');
+        Route::get('admins/create', [AdminUserController::class, 'create'])->name('admins.create');
+        Route::post('admins/create', [AdminUserController::class, 'store'])->name('admins.store');
+        Route::patch('admins/{user}/toggle-status', [AdminUserController::class, 'toggleStatus'])->name('admins.toggle-status');
 
         Route::get('delivery-zones', [DeliveryZoneController::class, 'index'])->name('delivery-zones.index');
         Route::post('delivery-zones', [DeliveryZoneController::class, 'store'])->name('delivery-zones.store');

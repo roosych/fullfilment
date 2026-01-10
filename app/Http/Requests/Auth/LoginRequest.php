@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Enums\UserRoleEnum;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -64,6 +65,17 @@ class LoginRequest extends FormRequest
 
             throw ValidationException::withMessages([
                 'phone' => trans('auth.failed'),
+            ]);
+        }
+
+        // Проверяем, что активные админы могут авторизоваться
+        $user = Auth::user();
+        if ($user->hasRole(UserRoleEnum::ADMIN->value) && !$user->active) {
+            Auth::logout();
+            RateLimiter::hit($this->throttleKey());
+
+            throw ValidationException::withMessages([
+                'phone' => 'Your account is inactive. Please contact an administrator.',
             ]);
         }
 
