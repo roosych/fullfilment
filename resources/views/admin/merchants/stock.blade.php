@@ -1,12 +1,12 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Stock - ' . $merchant->user->name)
+@section('title', 'Склад - ' . $merchant->user->name)
 
 @section('breadcrumbs')
     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
         <li class="breadcrumb-item text-muted">
             <a href="{{route('dashboard.index')}}" class="text-muted text-hover-primary">
-                Dashboard
+                Панель управления
             </a>
         </li>
         <li class="breadcrumb-item">
@@ -14,7 +14,7 @@
         </li>
         <li class="breadcrumb-item text-muted">
             <a href="{{route('dashboard.merchants.index')}}" class="text-muted text-hover-primary">
-                Merchants
+                Мерчанты
             </a>
         </li>
         <li class="breadcrumb-item">
@@ -29,7 +29,7 @@
             <span class="bullet bg-gray-500 w-5px h-2px"></span>
         </li>
         <li class="breadcrumb-item text-muted">
-            Stock
+            Склад
         </li>
     </ul>
 @endsection
@@ -56,11 +56,11 @@
             <table id="kt_ecommerce_products_table" class="table align-middle table-row-dashed fs-6 gy-5">
                 <thead>
                 <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                    <th class="min-w-200px">Product</th>
-                    <th class="text-center min-w-100px">SKU</th>
-                    <th class="text-center min-w-70px">Warehouse/Qty</th>
-                    <th class="text-center min-w-100px">Total Qty</th>
-                    <th class="text-end min-w-70px">Actions</th>
+                    <th class="min-w-200px">Товар</th>
+                    <th class="text-center min-w-100px">Артикул</th>
+                    <th class="text-center min-w-70px">Склад/Кол-во</th>
+                    <th class="text-center min-w-100px">Всего</th>
+                    <th class="text-end min-w-70px">Действия</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -81,7 +81,7 @@
                         <td class="text-center fw-bold">
                             {{ array_sum($data['warehouses']) }}
                         </td>
-                        <td class="text-end">buttons</td>
+                        <td class="text-end">—</td>
                     </tr>
                 @endforeach
                 </tbody>

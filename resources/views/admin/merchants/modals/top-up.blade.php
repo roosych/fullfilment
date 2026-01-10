@@ -18,17 +18,17 @@
 
                     <div class="mb-13 text-center">
                         <h1 class="mb-3">
-                            {{__('Top Up Merchant Balance')}}
+                            Пополнить баланс мерчанта
                         </h1>
                         <div class="text-muted fw-semibold fs-6">
-                            {{__('Enter the amount you want to add to this merchant\'s balance.')}}
+                            Введите сумму, которую хотите добавить к балансу этого мерчанта.
                         </div>
                     </div>
 
                     <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
                         <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
                             <span class="required">
-                                {{__('Amount')}}
+                                Сумма
                             </span>
                         </label>
 
@@ -49,11 +49,11 @@
 
                     <div class="text-center">
                         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">
-                            {{__('Cancel')}}
+                            Отмена
                         </button>
                         <button type="submit" id="top_up_submit" class="btn btn-primary">
                             <span class="indicator-label">
-                                {{__('Top Up')}}
+                                Пополнить
                             </span>
                         </button>
                     </div>

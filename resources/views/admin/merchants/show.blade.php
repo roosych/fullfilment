@@ -77,12 +77,12 @@
 
                     <!-- Details -->
                     <div class="d-flex flex-stack fs-4 py-3">
-                        <div class="fw-bold">Details</div>
+                        <div class="fw-bold">Детали</div>
                     </div>
                     <div class="separator separator-dashed my-3"></div>
 
                     <div class="pb-5 fs-6">
-                        <div class="fw-bold mt-5">Account ID</div>
+                        <div class="fw-bold mt-5">ID аккаунта</div>
                         <div class="text-gray-600">{{$merchant->user->id}}</div>
 
                         <div class="fw-bold mt-5">Email</div>
@@ -90,10 +90,10 @@
                             <a href="#" class="text-gray-600 text-hover-primary">{{$merchant->user->email}}</a>
                         </div>
 
-                        <div class="fw-bold mt-5">Company</div>
+                        <div class="fw-bold mt-5">Компания</div>
                         <div class="text-gray-600">{{$merchant->company}}</div>
 
-                        <div class="fw-bold mt-5">Address</div>
+                        <div class="fw-bold mt-5">Адрес</div>
                         <div class="text-gray-600">{{$merchant->address}}</div>
                     </div>
                 </div>
@@ -184,12 +184,12 @@
                         <div class="card card-flush h-xl-100">
                             <div class="card-header pt-7">
                                 <h3 class="card-title align-items-start flex-column">
-                                    <span class="card-label fw-bold text-gray-900">Last Deliveries</span>
+                                    <span class="card-label fw-bold text-gray-900">Последние доставки</span>
                                 </h3>
 
                                 <div class="card-toolbar">
                                     <div class="d-flex flex-stack flex-wrap gap-4">
-                                        <a href="#" class="btn btn-light btn-sm">All Deliveries</a>
+                                        <a href="#" class="btn btn-light btn-sm">Все доставки</a>
                                     </div>
                                 </div>
                             </div>
@@ -199,12 +199,12 @@
                                     <thead>
                                     <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                         <th class="min-w-150px">ID</th>
-                                        <th class="text-end pe-3 min-w-100px">Order</th>
-                                        <th class="text-end pe-3 min-w-150px">Rate</th>
-                                        <th class="text-end pe-3 min-w-100px">Zone</th>
-                                        <th class="text-end pe-3 min-w-100px">Weight</th>
-                                        <th class="text-end pe-3 min-w-100px">Status</th>
-                                        <th class="text-end pe-0 min-w-75px">Price</th>
+                                        <th class="text-end pe-3 min-w-100px">Заказ</th>
+                                        <th class="text-end pe-3 min-w-150px">Тариф</th>
+                                        <th class="text-end pe-3 min-w-100px">Зона</th>
+                                        <th class="text-end pe-3 min-w-100px">Вес</th>
+                                        <th class="text-end pe-3 min-w-100px">Статус</th>
+                                        <th class="text-end pe-0 min-w-75px">Цена</th>
                                     </tr>
                                     </thead>
 
@@ -228,7 +228,11 @@
                                             <td class="text-end">{{money($delivery->price)}}</td>
                                         </tr>
                                     @empty
-                                        empty
+                                        <tr>
+                                            <td colspan="7" class="text-center py-10">
+                                                <span class="text-gray-500">Доставок пока нет</span>
+                                            </td>
+                                        </tr>
                                     @endforelse
                                     </tbody>
                                 </table>
@@ -255,10 +259,10 @@
                             <table class="table align-middle table-row-dashed gy-5">
                                 <thead class="border-bottom border-gray-200 fs-7 fw-bold">
                                 <tr class="text-start text-muted text-uppercase gs-0">
-                                    <th class="min-w-100px">uuid</th>
-                                    <th>Type</th>
-                                    <th>Amount</th>
-                                    <th class="min-w-100px">Date</th>
+                                    <th class="min-w-100px">ID</th>
+                                    <th>Тип</th>
+                                    <th>Сумма</th>
+                                    <th class="min-w-100px">Дата</th>
                                 </tr>
                                 </thead>
 
@@ -284,7 +288,7 @@
                     <div class="card pt-4 mb-6 mb-xl-9">
                         <div class="card-header border-0">
                             <div class="card-title">
-                                <h2>Stock Intake History</h2>
+                                <h2>История приема товара</h2>
                             </div>
                         </div>
 
@@ -292,11 +296,11 @@
                             <table class="table align-middle table-row-dashed gy-5">
                                 <thead class="border-bottom border-gray-200 fs-7 fw-bold">
                                 <tr class="text-start text-muted text-uppercase gs-0">
-                                    <th class="min-w-100px">Code</th>
-                                    <th>Warehouse</th>
-                                    <th>Product Count</th>
-                                    <th>Total Quantity</th>
-                                    <th class="min-w-100px">Received at</th>
+                                    <th class="min-w-100px">Код</th>
+                                    <th>Склад</th>
+                                    <th>Количество товаров</th>
+                                    <th>Общее количество</th>
+                                    <th class="min-w-100px">Дата приема</th>
                                 </tr>
                                 </thead>
 
@@ -322,10 +326,12 @@
                 </div> <!-- END TAB 2 -->
 
                 {{-- =============================
-                    TAB 3 — ORDERS
+                    ВКЛАДКА 3 — ЗАКАЗЫ
                 ============================= --}}
                 <div class="tab-pane fade" id="merchant_orders" role="tabpanel">
-                    tab 3
+                    <div class="text-center py-10">
+                        <span class="text-gray-500">Заказы будут отображаться здесь</span>
+                    </div>
                 </div>
 
             </div> <!-- END tab-content -->

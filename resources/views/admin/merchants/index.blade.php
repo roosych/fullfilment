@@ -53,12 +53,12 @@
             <table class="table align-middle table-row-dashed fs-6 gy-5" id="merchants_table">
                 <thead>
                 <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                    <th class="min-w-100px">{{__('Name')}}</th>
-                    <th class="text-center">{{__('Company name')}}</th>
-                    <th class="text-center">{{__('Products')}}</th>
-                    <th class="text-center">{{__('Completed deliveries')}}</th>
-                    <th class="text-center">{{__('Balance')}}</th>
-                    <th class="text-end">{{__('Status')}}</th>
+                    <th class="min-w-100px">Имя</th>
+                    <th class="text-center">Название компании</th>
+                    <th class="text-center">Товары</th>
+                    <th class="text-center">Выполненные доставки</th>
+                    <th class="text-center">Баланс</th>
+                    <th class="text-end">Статус</th>
                     <th class="text-end">Действия</th>
                 </tr>
                 </thead>
@@ -104,7 +104,7 @@
                             </a>
                         </td>
                         <td class="text-center pe-0">
-                            df
+                            —
                         </td>
                         <td class="text-center align-middle">
                             <div class="d-inline-flex align-items-center justify-content-center">
