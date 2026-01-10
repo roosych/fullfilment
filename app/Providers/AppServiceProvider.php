@@ -43,6 +43,11 @@ class AppServiceProvider extends ServiceProvider
         // Принудительно используем HTTPS в production или если APP_URL содержит https
         if (app()->environment('production') || str_starts_with(config('app.url'), 'https://')) {
             URL::forceScheme('https');
+            
+            // Устанавливаем secure для cookies в production
+            if (app()->environment('production')) {
+                config(['session.secure' => true]);
+            }
         }
     }
 }
