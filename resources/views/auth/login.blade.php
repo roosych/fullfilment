@@ -51,8 +51,7 @@
                         <div class="fv-row mb-8">
                             <input type="text"
                                    id="phone"
-                                   {{--value="{{@old('phone')}}"--}}
-                                   value=""
+                                   value="{{ old('phone') }}"
                                    placeholder="Номер телефона"
                                    name="phone"
                                    autocomplete="off"

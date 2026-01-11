@@ -14,7 +14,7 @@
         </li>
         <li class="breadcrumb-item text-muted">
             <a href="{{route('dashboard.warehouses.index')}}" class="text-muted text-hover-primary">
-                Warehouses
+                Склады
             </a>
         </li>
         <li class="breadcrumb-item">
@@ -44,7 +44,7 @@
         </div>
 
         <div class="card-body">
-            <form action="{{ route('dashboard.warehouses.store') }}" method="POST" class="needs-validation" novalidate>
+            <form id="warehouseForm" action="{{ route('dashboard.warehouses.store') }}" method="POST" class="needs-validation" novalidate>
                 @csrf
 
                 <div class="row mb-6">
@@ -75,10 +75,37 @@
                 </div>
 
                 <div class="d-flex justify-content-end">
-                    <a href="{{ route('dashboard.warehouses.index') }}" class="btn btn-light me-3">Отмена</a>
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <a href="{{ route('dashboard.warehouses.index') }}" id="cancelBtn" class="btn btn-light me-3">Отмена</a>
+                    <button type="submit" id="submitBtn" class="btn btn-primary">
+                        <span class="indicator-label">
+                            Сохранить
+                        </span>
+                        <span class="indicator-progress d-none">
+                            Сохранение...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2" role="status" aria-hidden="true"></span>
+                        </span>
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 @endsection
+
+@push('custom_js')
+    <script>
+        $(document).ready(function() {
+            // Обработчик отправки формы с индикатором загрузки
+            $('#warehouseForm').on('submit', function(e) {
+                const $submitBtn = $('#submitBtn');
+                const $cancelBtn = $('#cancelBtn');
+                
+                // Блокируем кнопку отправки и меняем содержимое на текст с крутилкой
+                $submitBtn.prop('disabled', true);
+                $submitBtn.html('Сохранение... <span class="spinner-border spinner-border-sm align-middle ms-2" role="status" aria-hidden="true"></span>');
+                
+                // Блокируем кнопку отмены
+                $cancelBtn.addClass('disabled').css('pointer-events', 'none').css('opacity', '0.6');
+            });
+        });
+    </script>
+@endpush

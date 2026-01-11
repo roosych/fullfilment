@@ -33,7 +33,7 @@
 
     <div class="card">
         <div class="card-body py-4">
-            <form action="{{ route('dashboard.merchants.store') }}" method="POST" enctype="multipart/form-data">
+            <form id="merchantForm" action="{{ route('dashboard.merchants.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <!-- User Info -->
@@ -88,7 +88,18 @@
                            value="{{ old('balance', 0) }}" step="0.01" min="0">
                 </div>
 
-                <button type="submit" class="btn btn-primary">Создать мерчанта</button>
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="{{ route('dashboard.merchants.index') }}" id="cancelBtn" class="btn btn-light">Отмена</a>
+                    <button type="submit" id="submitBtn" class="btn btn-primary">
+                        <span class="indicator-label">
+                            Создать мерчанта
+                        </span>
+                        <span class="indicator-progress d-none">
+                            Создается...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2" role="status" aria-hidden="true"></span>
+                        </span>
+                    </button>
+                </div>
             </form>
 
         </div>
@@ -104,5 +115,20 @@
 @endpush
 
 @push('custom_js')
-
+    <script>
+        $(document).ready(function() {
+            // Обработчик отправки формы с индикатором загрузки
+            $('#merchantForm').on('submit', function(e) {
+                const $submitBtn = $('#submitBtn');
+                const $cancelBtn = $('#cancelBtn');
+                
+                // Блокируем кнопку отправки и меняем содержимое на текст с крутилкой
+                $submitBtn.prop('disabled', true);
+                $submitBtn.html('Создается... <span class="spinner-border spinner-border-sm align-middle ms-2" role="status" aria-hidden="true"></span>');
+                
+                // Блокируем кнопку отмены
+                $cancelBtn.addClass('disabled').css('pointer-events', 'none').css('opacity', '0.6');
+            });
+        });
+    </script>
 @endpush

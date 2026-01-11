@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="card pt-5 mb-5">
-        <form action="{{ route('dashboard.stock.store', [$merchant, $warehouse]) }}" method="POST">
+        <form id="stockPreviewForm" action="{{ route('dashboard.stock.store', [$merchant, $warehouse]) }}" method="POST">
             @csrf
             <div class="card-body pt-3">
                 <div class="mb-10">
@@ -108,12 +108,18 @@
 
             <div class="card-footer">
                 <div class="d-flex justify-content-between">
-                    <a href="{{ route('dashboard.stock.create', [$merchant, $warehouse]) }}?from_preview=1" class="btn btn-light-primary">
+                    <a href="{{ route('dashboard.stock.create', [$merchant, $warehouse]) }}?from_preview=1" id="cancelBtn" class="btn btn-light-primary">
                         Назад
                     </a>
 
-                    <button type="submit" class="btn btn-success">
-                        Подтвердить
+                    <button type="submit" id="submitBtn" class="btn btn-success">
+                        <span class="indicator-label">
+                            Подтвердить
+                        </span>
+                        <span class="indicator-progress d-none">
+                            Сохранение...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2" role="status" aria-hidden="true"></span>
+                        </span>
                     </button>
                 </div>
             </div>
@@ -121,3 +127,22 @@
         </form>
     </div>
 @endsection
+
+@push('custom_js')
+    <script>
+        $(document).ready(function() {
+            // Обработчик отправки формы с индикатором загрузки
+            $('#stockPreviewForm').on('submit', function(e) {
+                const $submitBtn = $('#submitBtn');
+                const $cancelBtn = $('#cancelBtn');
+                
+                // Блокируем кнопку отправки и меняем содержимое на текст с крутилкой
+                $submitBtn.prop('disabled', true);
+                $submitBtn.html('Сохранение... <span class="spinner-border spinner-border-sm align-middle ms-2" role="status" aria-hidden="true"></span>');
+                
+                // Блокируем кнопку отмены
+                $cancelBtn.addClass('disabled').css('pointer-events', 'none').css('opacity', '0.6');
+            });
+        });
+    </script>
+@endpush

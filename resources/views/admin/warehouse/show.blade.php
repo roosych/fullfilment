@@ -44,7 +44,7 @@
         </div>
 
         <div class="card-body">
-            <form action="{{ route('dashboard.warehouses.update', $warehouse) }}" method="POST" class="needs-validation" novalidate>
+            <form id="warehouseEditForm" action="{{ route('dashboard.warehouses.update', $warehouse) }}" method="POST" class="needs-validation" novalidate>
                 @csrf
                 @method('PUT')
 
@@ -87,10 +87,37 @@
                 </div>
 
                 <div class="d-flex justify-content-end">
-                    <a href="{{ route('dashboard.warehouses.index') }}" class="btn btn-light me-3">Отмена</a>
-                    <button type="submit" class="btn btn-primary">Обновить</button>
+                    <a href="{{ route('dashboard.warehouses.index') }}" id="cancelBtn" class="btn btn-light me-3">Отмена</a>
+                    <button type="submit" id="submitBtn" class="btn btn-primary">
+                        <span class="indicator-label">
+                            Обновить
+                        </span>
+                        <span class="indicator-progress d-none">
+                            Обновление...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2" role="status" aria-hidden="true"></span>
+                        </span>
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 @endsection
+
+@push('custom_js')
+    <script>
+        $(document).ready(function() {
+            // Обработчик отправки формы с индикатором загрузки
+            $('#warehouseEditForm').on('submit', function(e) {
+                const $submitBtn = $('#submitBtn');
+                const $cancelBtn = $('#cancelBtn');
+                
+                // Блокируем кнопку отправки и меняем содержимое на текст с крутилкой
+                $submitBtn.prop('disabled', true);
+                $submitBtn.html('Обновление... <span class="spinner-border spinner-border-sm align-middle ms-2" role="status" aria-hidden="true"></span>');
+                
+                // Блокируем кнопку отмены
+                $cancelBtn.addClass('disabled').css('pointer-events', 'none').css('opacity', '0.6');
+            });
+        });
+    </script>
+@endpush

@@ -117,7 +117,15 @@
         </div>
 
         <div class="d-flex justify-content-end mt-5">
-            <button type="submit" class="btn btn-primary">Предпросмотр</button>
+            <button type="submit" id="submitBtn" class="btn btn-primary">
+                <span class="indicator-label">
+                    Предпросмотр
+                </span>
+                <span class="indicator-progress d-none">
+                    Загрузка...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2" role="status" aria-hidden="true"></span>
+                </span>
+            </button>
         </div>
     </form>
 @endsection
@@ -176,6 +184,15 @@
 
             // Инициализация Select2 для существующих рядов
             initSelect2($('#kt_docs_repeater_basic'));
+
+            // Обработчик отправки формы с индикатором загрузки
+            $('#stock-form').on('submit', function(e) {
+                const $submitBtn = $('#submitBtn');
+                
+                // Блокируем кнопку отправки и меняем содержимое на текст с крутилкой
+                $submitBtn.prop('disabled', true);
+                $submitBtn.html('Загрузка... <span class="spinner-border spinner-border-sm align-middle ms-2" role="status" aria-hidden="true"></span>');
+            });
 
             // Применяем toggle для всех рядов при загрузке страницы
             $('#kt_docs_repeater_basic [data-repeater-item]').each(function () {

@@ -33,7 +33,7 @@
 
     <div class="card">
         <div class="card-body py-4">
-            <form action="{{ route('dashboard.admins.store') }}" method="POST">
+            <form id="adminForm" action="{{ route('dashboard.admins.store') }}" method="POST">
                 @csrf
 
                 <!-- User Info -->
@@ -105,8 +105,16 @@
                 </div>
 
                 <div class="d-flex justify-content-end gap-3">
-                    <a href="{{ route('dashboard.admins.index') }}" class="btn btn-light">Отмена</a>
-                    <button type="submit" class="btn btn-primary">Создать администратора</button>
+                    <a href="{{ route('dashboard.admins.index') }}" id="cancelBtn" class="btn btn-light">Отмена</a>
+                    <button type="submit" id="submitBtn" class="btn btn-primary">
+                        <span class="indicator-label">
+                            Создать администратора
+                        </span>
+                        <span class="indicator-progress d-none">
+                            Создается...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2" role="status" aria-hidden="true"></span>
+                        </span>
+                    </button>
                 </div>
             </form>
         </div>
@@ -129,6 +137,19 @@
                 "mask" : "(999) 999 99 99",
                 "removeMaskOnSubmit": false
             }).mask("#phone");
+
+            // Обработчик отправки формы с индикатором загрузки
+            $('#adminForm').on('submit', function(e) {
+                const $submitBtn = $('#submitBtn');
+                const $cancelBtn = $('#cancelBtn');
+                
+                // Блокируем кнопку отправки и меняем содержимое на текст с крутилкой
+                $submitBtn.prop('disabled', true);
+                $submitBtn.html('Создается... <span class="spinner-border spinner-border-sm align-middle ms-2" role="status" aria-hidden="true"></span>');
+                
+                // Блокируем кнопку отмены
+                $cancelBtn.addClass('disabled').css('pointer-events', 'none').css('opacity', '0.6');
+            });
         });
     </script>
 @endpush

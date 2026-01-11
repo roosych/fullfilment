@@ -47,7 +47,15 @@
                     <input type="text" class="form-control" name="name" required>
                 </div>
 
-                <button class="btn btn-primary mt-2">Сохранить зону</button>
+                <button type="submit" id="submitBtn" class="btn btn-primary mt-2">
+                    <span class="indicator-label">
+                        Сохранить зону
+                    </span>
+                    <span class="indicator-progress d-none">
+                        Сохранение...
+                        <span class="spinner-border spinner-border-sm align-middle ms-2" role="status" aria-hidden="true"></span>
+                    </span>
+                </button>
             </form>
 
             <!-- Список зон и тарифов -->
@@ -134,6 +142,15 @@
                     });
                     document.getElementById('polygon_coordinates').value = JSON.stringify(coords);
                 });
+            });
+
+            // Обработчик отправки формы с индикатором загрузки
+            $('#zone_form').on('submit', function(e) {
+                const $submitBtn = $('#submitBtn');
+                
+                // Блокируем кнопку отправки и меняем содержимое на текст с крутилкой
+                $submitBtn.prop('disabled', true);
+                $submitBtn.html('Сохранение... <span class="spinner-border spinner-border-sm align-middle ms-2" role="status" aria-hidden="true"></span>');
             });
         });
     </script>
