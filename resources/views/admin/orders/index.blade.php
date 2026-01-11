@@ -59,7 +59,10 @@
                            id="kt_ecommerce_sales_flatpickr" />
                     <button class="btn btn-icon btn-light"
                             id="kt_ecommerce_sales_flatpickr_clear">
-                        <i class="ki-outline ki-cross fs-2"></i>
+                        <i class="ki-duotone ki-calendar">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
                     </button>
                 </div>
 
