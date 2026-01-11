@@ -1,6 +1,15 @@
 <div id="kt_app_header" class="app-header">
     <div class="app-header-primary "
          data-kt-sticky="true" data-kt-sticky-name="app-header-primary-sticky" data-kt-sticky-offset="{default: 'false', lg: '300px'}"
+         @auth()
+         @if(Auth::user()->hasRole('merchant'))
+         style="background-image: url('{{asset('assets/img/merchant-header-bg.png')}}')"
+         @else
+         style="background-image: url('{{asset('assets/img/header-bg.png')}}')"
+         @endif
+         @else
+         style="background-image: url('{{asset('assets/img/header-bg.png')}}')"
+         @endauth
     >
         <div class="app-container  container-xxl d-flex align-items-stretch justify-content-between " id="kt_app_header_primary_container">
             <div class="d-flex flex-grow-1 flex-lg-grow-0">
@@ -27,7 +36,7 @@
                     </div>
                     <div class="menu menu-sub menu-sub-dropdown menu-column w-250px w-lg-325px" data-kt-menu="true">
                         <div class="d-flex flex-column flex-center bgi-no-repeat rounded-top px-9 py-10"
-                             style="background-image:url('{{asset('assets/img/header-bg.png')}}')">
+                             style="background-image:url('{{asset('assets/img/' . (auth()->check() && auth()->user()->hasRole('merchant') ? 'merchant-header-bg.png' : 'header-bg.png'))}}')">
                             <h3 class="text-white fw-semibold mb-3">
                                 Quick links
                             </h3>
