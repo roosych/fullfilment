@@ -55,7 +55,7 @@ class IndexController extends Controller
             ->sum('price');
 
         // Последние заказы
-        $recentOrders = Order::with(['merchant.user', 'status'])
+        $recentOrders = Order::with(['merchant.user'])
             ->latest()
             ->limit(10)
             ->get();
