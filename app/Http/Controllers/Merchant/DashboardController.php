@@ -27,11 +27,17 @@ class DashboardController extends Controller
 
         // Статистика по товарам
         $productsCount = $merchant->products()->count();
-        $totalStock = DB::table('stock_entries')
+        $stockStats = DB::table('stock_entries')
             ->join('products', 'stock_entries.product_id', '=', 'products.id')
             ->where('products.merchant_id', $merchant->id)
-            ->select(DB::raw('SUM(stock_entries.remaining_quantity - stock_entries.reserved_quantity) as available'))
-            ->value('available') ?? 0;
+            ->select(
+                DB::raw('SUM(stock_entries.remaining_quantity) as total'),
+                DB::raw('SUM(stock_entries.reserved_quantity) as reserved')
+            )
+            ->first();
+        
+        $totalStock = $stockStats->total ?? 0;
+        $reservedStock = $stockStats->reserved ?? 0;
 
         // Последние заказы
         $recentOrders = $merchant->orders()
@@ -59,6 +65,7 @@ class DashboardController extends Controller
             'completedOrdersCount',
             'productsCount',
             'totalStock',
+            'reservedStock',
             'recentOrders',
             'recentTransactions'
         ));

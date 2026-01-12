@@ -73,13 +73,13 @@
     <!-- Информация о балансе -->
     <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
         <div class="col-md-6">
-            <div class="card card-flush">
+            <div class="card card-flush h-100">
                 <div class="card-header">
                     <div class="card-title">
                         <h2>Баланс</h2>
                     </div>
                 </div>
-                <div class="card-body pt-0">
+                <div class="card-body pt-0 d-flex flex-column">
                     <div class="mb-5">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <span class="text-gray-600">Доступный баланс:</span>
@@ -95,17 +95,21 @@
         </div>
 
         <div class="col-md-6">
-            <div class="card card-flush">
+            <div class="card card-flush h-100">
                 <div class="card-header">
                     <div class="card-title">
                         <h2>Остатки</h2>
                     </div>
                 </div>
-                <div class="card-body pt-0">
+                <div class="card-body pt-0 d-flex flex-column">
                     <div class="mb-5">
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
                             <span class="text-gray-600">Общий остаток товаров:</span>
                             <span class="fs-3 fw-bold text-gray-800">{{ $totalStock }} шт.</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-gray-600">Зарезервировано:</span>
+                            <span class="fs-3 fw-bold text-warning">{{ $reservedStock }} шт.</span>
                         </div>
                     </div>
                 </div>
@@ -113,8 +117,83 @@
         </div>
     </div>
 
-    <!-- Последние транзакции -->
+    <!-- Последние доставки -->
     <div class="card card-flush mb-5 mb-xl-10">
+        <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+            <div class="card-title">
+                <h2>Последние доставки</h2>
+            </div>
+            <div class="card-toolbar">
+                <a href="{{ route('cabinet.orders.index') }}" class="btn btn-sm btn-primary">
+                    Все доставки
+                </a>
+            </div>
+        </div>
+        <div class="card-body pt-0">
+            <div class="table-responsive">
+                <table class="table align-middle table-row-dashed fs-6 gy-5">
+                    <thead>
+                    <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                        <th class="min-w-100px">ID</th>
+                        <th class="min-w-150px">Получатель</th>
+                        <th class="text-center min-w-100px">Статус</th>
+                        <th class="text-center min-w-100px">Товары</th>
+                        <th class="text-center min-w-100px">Дата создания</th>
+                        <th class="text-end min-w-100px">Действия</th>
+                    </tr>
+                    </thead>
+                    <tbody class="fw-semibold text-gray-600">
+                    @forelse($recentOrders as $order)
+                        <tr>
+                            <td>
+                                    <a href="{{route('cabinet.orders.show', $order)}}" class="text-gray-800 text-hover-primary fw-bold">
+                                    #{{$order->id}}
+                                </a>
+                            </td>
+                            <td>
+                                <div class="d-flex flex-column">
+                                    <span class="text-gray-800 fw-bold">{{$order->recipient_name}}</span>
+                                    <span class="text-gray-500">{{$order->recipient_phone}}</span>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="badge badge-light-{{ $order->status->colorClass() }}">
+                                    {{ $order->status->label() }}
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <span class="fw-bold text-gray-800">
+                                    {{$order->items->count()}} / {{ $order->items->sum('quantity') }}
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <span class="fw-bold">{{ \Carbon\Carbon::parse($order->created_at)->isoFormat('DD MMM Y, HH:mm') }}</span>
+                            </td>
+                            <td class="text-end">
+                                <a href="{{route('cabinet.orders.show', $order)}}" class="btn btn-icon btn-sm btn-light">
+                                    <i class="ki-duotone ki-black-right fs-2 text-muted">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                </a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="text-center text-gray-500 py-10">
+                                Доставок пока нет
+                            </td>
+                        </tr>
+                    @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Последние транзакции -->
+    <div class="card card-flush">
         <div class="card-header align-items-center py-5 gap-2 gap-md-5">
             <div class="card-title">
                 <h2>Последние транзакции</h2>
@@ -186,81 +265,6 @@
                         <tr>
                             <td colspan="4" class="text-center text-gray-500 py-10">
                                 Транзакций пока нет
-                            </td>
-                        </tr>
-                    @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- Последние доставки -->
-    <div class="card card-flush">
-        <div class="card-header align-items-center py-5 gap-2 gap-md-5">
-            <div class="card-title">
-                <h2>Последние доставки</h2>
-            </div>
-            <div class="card-toolbar">
-                <a href="{{ route('cabinet.orders.index') }}" class="btn btn-sm btn-primary">
-                    Все доставки
-                </a>
-            </div>
-        </div>
-        <div class="card-body pt-0">
-            <div class="table-responsive">
-                <table class="table align-middle table-row-dashed fs-6 gy-5">
-                    <thead>
-                    <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                        <th class="min-w-100px">ID</th>
-                        <th class="min-w-150px">Получатель</th>
-                        <th class="text-center min-w-100px">Статус</th>
-                        <th class="text-center min-w-100px">Товары</th>
-                        <th class="text-center min-w-100px">Дата создания</th>
-                        <th class="text-end min-w-100px">Действия</th>
-                    </tr>
-                    </thead>
-                    <tbody class="fw-semibold text-gray-600">
-                    @forelse($recentOrders as $order)
-                        <tr>
-                            <td>
-                                    <a href="{{route('cabinet.orders.show', $order)}}" class="text-gray-800 text-hover-primary fw-bold">
-                                    #{{$order->id}}
-                                </a>
-                            </td>
-                            <td>
-                                <div class="d-flex flex-column">
-                                    <span class="text-gray-800 fw-bold">{{$order->recipient_name}}</span>
-                                    <span class="text-gray-500">{{$order->recipient_phone}}</span>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                <div class="badge badge-light-{{ $order->status->colorClass() }}">
-                                    {{ $order->status->label() }}
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                <span class="fw-bold text-gray-800">
-                                    {{$order->items->count()}} / {{ $order->items->sum('quantity') }}
-                                </span>
-                            </td>
-                            <td class="text-center">
-                                <span class="fw-bold">{{ \Carbon\Carbon::parse($order->created_at)->isoFormat('DD MMM Y, HH:mm') }}</span>
-                            </td>
-                            <td class="text-end">
-                                <a href="{{route('cabinet.orders.show', $order)}}" class="btn btn-icon btn-sm btn-light">
-                                    <i class="ki-duotone ki-black-right fs-2 text-muted">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                    </i>
-                                </a>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="6" class="text-center text-gray-500 py-10">
-                                Доставок пока нет
                             </td>
                         </tr>
                     @endforelse
