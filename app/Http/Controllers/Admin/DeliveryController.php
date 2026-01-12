@@ -221,10 +221,9 @@ class DeliveryController extends Controller
 
     /**
      * Завершение доставки
-     * DeliveryStatus: CREATED/ON_THE_WAY → DELIVERED
+     * DeliveryStatus: ON_THE_WAY → DELIVERED
      * OrderStatus: → DELIVERED
      *
-     * CREATED → DELIVERED: освобождение резерва (без списания)
      * ON_THE_WAY → DELIVERED: списание средств
      */
     public function complete(Delivery $delivery)
@@ -232,10 +231,10 @@ class DeliveryController extends Controller
         // Проверяем доступ через Policy
         $this->authorize('complete', $delivery);
 
-        if (!in_array($delivery->status, [DeliveryStatusEnum::CREATED, DeliveryStatusEnum::ON_THE_WAY])) {
+        if ($delivery->status !== DeliveryStatusEnum::ON_THE_WAY) {
             return response()->json([
                 'success' => false,
-                'message' => 'Доставка уже завершена или отменена.'
+                'message' => 'Можно завершить только доставку в статусе "В пути". Сначала отправьте доставку в путь.'
             ], 400);
         }
 
@@ -244,48 +243,23 @@ class DeliveryController extends Controller
         try {
             DB::beginTransaction();
 
-            // Если доставка была ON_THE_WAY - списываем средства
-            if ($delivery->status === DeliveryStatusEnum::ON_THE_WAY) {
+            $delivery->update([
+                'status' => DeliveryStatusEnum::DELIVERED,
+                'delivered_at' => now(),
+            ]);
 
-                $delivery->update([
-                    'status' => DeliveryStatusEnum::DELIVERED,
-                    'delivered_at' => now(),
-                ]);
+            // Списываем средства из резерва и баланса
+            $merchant->debitFromReserve($delivery->price);
 
-                // Списываем средства из резерва и баланса
-                $merchant->debitFromReserve($delivery->price);
+            // Создаём транзакцию оплаты доставки
+            $merchant->transactions()->create([
+                'type' => BalanceTransactionTypeEnum::DELIVERY_PAYMENT,
+                'amount' => -$delivery->price,
+                'source_type' => Delivery::class,
+                'source_id' => $delivery->id,
+            ]);
 
-                // Создаём транзакцию оплаты доставки
-                $merchant->transactions()->create([
-                    'type' => BalanceTransactionTypeEnum::DELIVERY_PAYMENT,
-                    'amount' => -$delivery->price,
-                    'source_type' => Delivery::class,
-                    'source_id' => $delivery->id,
-                ]);
-
-                $message = 'Доставка завершена! Средства списаны.';
-
-            } else {
-                // Если доставка была CREATED - освобождаем резерв без списания
-
-                $delivery->update([
-                    'status' => DeliveryStatusEnum::DELIVERED,
-                    'delivered_at' => now(),
-                ]);
-
-                // Освобождаем резерв (деньги остаются у мерчанта)
-                $merchant->releaseReserve($delivery->price);
-
-                // Создаём транзакцию возврата резерва
-                $merchant->transactions()->create([
-                    'type' => BalanceTransactionTypeEnum::REFUND,
-                    'amount' => $delivery->price,
-                    'source_type' => Delivery::class,
-                    'source_id' => $delivery->id,
-                ]);
-
-                $message = 'Доставка завершена! Резерв освобождён без списания.';
-            }
+            $message = 'Доставка завершена! Средства списаны.';
 
             // Обновляем статус заказа
             $order = $delivery->order;

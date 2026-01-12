@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Order #' .$order->id)
+@section('title', 'Заказ #' .$order->id)
 
 @section('content')
     <div class="d-flex flex-column gap-7 gap-lg-10">
@@ -122,12 +122,6 @@
                                                     data-url="{{ route('dashboard.deliveries.start', $order->activeDelivery) }}">
                                                 Отправить в путь
                                             </button>
-                                            <button class="btn btn-sm btn-success ms-2 complete-delivery-btn"
-                                                    data-delivery-id="{{ $order->activeDelivery->id }}"
-                                                    data-url="{{ route('dashboard.deliveries.complete', $order->activeDelivery) }}"
-                                                    title="Завершить без списания">
-                                                Завершить
-                                            </button>
                                             <button class="btn btn-sm btn-danger ms-2 cancel-delivery-btn"
                                                     data-delivery-id="{{ $order->activeDelivery->id }}"
                                                     data-url="{{ route('dashboard.deliveries.cancel', $order->activeDelivery) }}">
@@ -154,12 +148,17 @@
                         </div>
                     </div>
 
-                    <!-- Order Items -->
+                    <!-- Товары заказа -->
                     <div class="card card-flush py-4 flex-row-fluid overflow-hidden">
                         <div class="card-header">
-                            <div class="card-title">
-                                <h2>Order #{{$order->id}}</h2>
-                                <div class="ms-3 fs-6 badge badge-light-{{$order->status->colorClass()}}">{{$order->status->label()}}</div>
+                            <div class="card-title w-100">
+                                <div class="d-flex align-items-start justify-content-between flex-wrap gap-2 w-100">
+                                    <div>
+                                        <h2 class="mb-1">Заказ #{{$order->id}}</h2>
+                                        <div class="fs-7 text-gray-500">UUID: {{$order->uuid}}</div>
+                                    </div>
+                                    <div class="fs-6 badge badge-light-{{$order->status->colorClass()}}">{{$order->status->label()}}</div>
+                                </div>
                             </div>
                         </div>
 
@@ -229,7 +228,7 @@
                 </div>
             </div>
 
-            <!-- Order History Tab -->
+            <!-- Вкладка истории заказа -->
             <div class="tab-pane fade" id="kt_ecommerce_sales_order_history" role="tab-panel">
                 <div class="d-flex flex-column gap-7 gap-lg-10">
                     <div class="card card-flush py-4 flex-row-fluid">
